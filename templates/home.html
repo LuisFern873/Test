@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block body %}
+  
+<h2>2.2 PRODUCTOS INTERNOS Y ESPACIOS DE HILBERT</h2>
+
+<p>En la sección anterior comenzamos con algunos ejemplos de espacios normados que ya eran conocidos, y luego procedimos a su generalización. Volvamos a esos ejemplos por un minuto: definimos una norma en $\mathbb{R}^n$, en el Ejemplo 2.4. </p>
+
+<h3>Ejemplo 2.4:</h3> 
+Sea $V=\mathbb{R}^n$ equipado con la norma.
+
+$$ \|x\|_2=\|(x_1,…,x_n)\|_2=\sum_{j=1}^{n}x_j^2 $$
+
+Esta es la norma habitual en $\mathbb{R}^n$. Probar que $(\mathbb{R}^n,\|\cdot\|_2)$ es un espacio normado.
+
+<h3>Solución:</h3>
+
+Esta es una norma que hemos visto antes (tal vez no con el mismo nombre), pero recordar una norma no es más que una forma de medir distancias y sabemos por álgebra lineal cómo medir la longitud de un vector en $\mathbb{R}^n$ mediante el uso del Teorema de Pitágoras. La longitud que alcanzamos con este razonamiento es exactamente la norma $\|\cdot\|_2$. Esto dice que hay algo especial en $p=2$, y sea lo que sea, está relacionado con el Teorema de Pitágoras y, por lo tanto, con la posibilidad de medir ángulos y decidir cuándo dos vectores son ortogonales en el espacio vectorial. 
+
+<b>En esta sección discutiremos sobre una estructura que permite medir ángulos y definir la noción de ortogonalidad en espacios más generales. Esta es la noción de espacios de producto interno.</b>
+
+<h3>Definición 2.14:</h3> 
+
+Sea $V$ un espacio vectorial sobre un campo $\mathbb{F}$. Un producto interno en $V$ es una función que asigna a cada par ordenado de vectores $v$ y $w$ en $V$, un escalar en $\mathbb{F}$ denotado por $\left\langle v,w\right\rangle$. Esta función satisface las siguientes propiedades para todo $v$,$w$ y $z$ en $V$ y todo $\alpha$ en $\mathbb{F}$:
+
+<ol>
+    <li>$\left\langle v+z,w\right\rangle=\left\langle v,w\right\rangle+\left\langle z,w\right\rangle$</li>
+    <li>$\left\langle\alpha v,w\right\rangle=\alpha\left\langle v,w\right\rangle$</li>
+    <li>$\overline{\left\langle v,w \right\rangle}=\left\langle w,v \right\rangle$</li>
+    <li>$\left\langle v,v\right\rangle>0 \ si \ v\neq0$</li>
+</ol>
+
+Con esta definición en la mano, podemos deducir las siguientes propiedades de un producto interno. Dejamos las pruebas como ejercicios.
+
+<h3>Teorema 2.15:</h3>
+
+Sea $(V,\left\langle\cdot,\cdot\right\rangle)$ un espacio producto interno. Entonces para $v,\ w$ y $z$ en $V$ y $\alpha$ en $\mathbb{F}$ se mantienen las siguientes propiedades.
+
+<ol>
+    <li>$\left\langle v, w + z\right\rangle = \left\langle v, w\right\rangle + \left\langle v, z \right\rangle$</li>
+    <li>$\left\langle v,\alpha w\right\rangle = \overline{\alpha}\left\langle v, w\right\rangle$</li>
+    <li>$\left\langle v, 0\right\rangle = \left\langle0, v\right\rangle =\ 0$</li>
+    <li>$\left\langle v, v\right\rangle = 0 \ si,\ y\ solo\ si, v\ =\ 0$</li>
+    <li>$Si \ \left\langle v,w\right\rangle= \left\langle v, z\right\rangle\Longrightarrow w=z,\ \forall \ v\ \in\ V$</li>
+</ol>
+
+{% endblock body %}
+
+
+
+
