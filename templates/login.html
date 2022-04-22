@@ -7,11 +7,11 @@
 {% block body %}
 
 <div class="container">
-    <form action='/login/user_added' method="POST">
+    <form id = 'form' action='/login/user_added' method="POST">
         <p>Username:</p>
-        <input type="text" name="username"/>
+        <input id = 'username' type="text" name="username"/>
         <p>Email:</p>
-        <input type="text" name="email"/>
+        <input id = 'email' type="text" name="email"/>
     
         <input type="submit" value="insert" />
     </form>    
@@ -34,6 +34,42 @@
             <th>{{user.date_added}}</th>
         </tr>
     {% endfor %}
+    <tr>
+        <th></th>
+        <th id = 'usernames'></th>
+        <th id = 'emails'></th>
+        <th></th>
+    </tr>
 </table>
+
+<script>
+    const username_input = document.getElementById('username')
+    const email_input = document.getElementById('email')
+
+    document.getElementById('form').onsubmit = function(e) {
+        e.preventDefault(); // prevent something go wrong by sending data to the form
+        const username = username_input.value;
+        const email = email_input.value;
+
+        fetch('/login/user_added',{
+            method: 'POST',
+            body: JSON.stringify({'username': username, 'email': email}),
+            headers: {'Content-Type': 'application/json'}
+        }). then(response => response.json()
+        ).then(function(jsonResponse) {
+            console.log("jsonResponse: ", jsonResponse);
+
+            const usnm = document.createElement('usnm');
+            const eml = document.createElement('eml');
+
+            usnm.innerHTML = jsonResponse['username'];
+            eml.innerHTML = jsonResponse['email'];
+
+            document.getElementById('usernames').appendChild(usnm);
+            document.getElementById('emails').appendChild(eml);
+        });
+    }
+
+</script>
 
 {% endblock body %}

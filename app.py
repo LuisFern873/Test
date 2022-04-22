@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import sys
@@ -30,24 +30,33 @@ def home():
 # HTTP methods
 @app.route('/login', methods=["POST","GET"])
 def login():
+    user = User.query.filter(User.username == 'Luis')
+    print(user)
+    
     return render_template('login.html', users = User.query.all())
 
 @app.route('/login/user_added', methods=["POST","GET"])
 def login_new():
+    response = {}
     try:
-        username = request.form.get('username','')
-        email = request.form.get('email','')
+        username = request.get_json()["username"]
+        email = request.get_json()["email"]
+
         user = User(username=username, email=email)
+
         db.session.add(user)
         db.session.commit()
-    except:
+        response['username'] = user.username
+        response['email'] = user.email
+    except Exception as exp:
         db.session.rollback()
         error = True
+        print(exp)
         print(sys.exc_info())
     finally:
         db.session.close()
 
-    return redirect(url_for('login'))
+    return jsonify(response)
 
 if __name__ == "__main__":
     app.run(debug = True)
