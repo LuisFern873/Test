@@ -1,3 +1,4 @@
 env
 __pycache__
 desktop.ini
+migrations
