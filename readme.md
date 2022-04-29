@@ -2,6 +2,10 @@
 
 ## Integrantes
 
+| Código    | Nombres y Apellidos         | Correo Institucional                                          |
+| --------- | --------------------------- | ------------------------------------------------------------- |
+| 202110216 | Luis Fernando Méndez Lázaro | [luis.mendez.l@utec.edu.pe](mailto:luis.mendez.l@utec.edu.pe) |
+
 ## Descripción
 
 ## Objetivos principales / Misión / Visión
