@@ -8,6 +8,7 @@
 
 ## Descripción
 
+
 ## Objetivos principales / Misión / Visión
 
 
@@ -19,11 +20,26 @@
 
 ## Hosts
 
-# Forma de autenticación
+## Forma de autenticación
 
-# Manejo de errores HTTP:
+## Manejo de errores HTTP:
 - 500: Errores en el Servidor
+
+Si los datos introducidos por el usuario en el formulario de registro no cumplen con el esquema o restricciones de la base de datos, se levanta una excepción y los datos no se persisten, arrojando un abort(500):
+
+```python
+if error:
+    abort(500)
+else:
+    return jsonify(response)
+```
+
+Para manejar este error en el servidor, el usuario es notificado con un mensaje invitandolo a realizar modificaciones en sus datos.
+
 - 400: Errores en el Clientes
+
+Si el usuario no tiene acceso a un determinado endpoint se le notifica sobre esta restricción.
+
 - 300: Redirección
 - 200: Exitoso
 - 100: Informacional
