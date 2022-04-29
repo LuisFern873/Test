@@ -5,6 +5,7 @@
 | Código    | Nombres y Apellidos         | Correo Institucional                                          |
 | --------- | --------------------------- | ------------------------------------------------------------- |
 | 202110216 | Luis Fernando Méndez Lázaro | [luis.mendez.l@utec.edu.pe](mailto:luis.mendez.l@utec.edu.pe) |
+| 202110394 | Jose Francisco Wong Orrillo | [jose.wong@utec.edu.pe](mailto:jose.wong@utec.edu.pe) |
 
 ## Descripción
 
