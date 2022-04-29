@@ -1,65 +1,12 @@
 {% extends "base.html" %}
 
 {% block head %}
-<link rel = "stylesheet" href = "{{ url_for('static', filename = 'login.css') }}">
+
 {% endblock head %}
+
 
 {% block body %}
 
-<div class="container">
-    <div class="title">Registro</div>
-    <form id = 'form' action='/login/user_added' method="POST">
-        <div class="user_details">
-
-            <div class="input_box">
-                <span class="details">Nombre completo:</span>
-                <input id = 'fullname' type="text" name="fullname" placeholder="Nombre completo" required/>
-            </div>
-
-            <div class="input_box">
-                <span class="details">Nombre de usuario:</span>
-                <input id = 'username' type="text" name="username" placeholder="Nombre de usuario" required/>
-            </div>
-
-            <div class="input_box">
-                <span class="details">Números de celular:</span>
-                <input id = 'phone' type="text" name="phone" placeholder="Número de celular" required/>
-            </div>
-
-            <div class="input_box">
-                <span class="details">Correo electrónico:</span>
-                <input id = 'email' type="text" name="email" placeholder="Correo electrónico" required/>
-            </div>
-
-            <div class="input_box">
-                <span class="details">Contraseña:</span>
-                <input id = 'password' type="text" name="password" placeholder="Contraseña" required/>
-            </div>
-
-            <div class="input_box">
-                <span class="details">Confirmar contraseña:</span>
-                <input id = 'cpassword' type="text" name="cpassword" placeholder="Confirmar contraseña" required/>
-            </div>
-
-        </div>
-        <div class="button">
-            <input type="submit" value="Regístrate" />
-        </div>
-    </form>
-    <!-- Error alert button -->
-    <div id="error" class="alert">
-        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        ¡Prueba otro nombre de usuario o email!
-    </div>
-
-    <div id="welcome" class="ad">
-        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        ¡Bienvenid@! <p id="full"> </p>
-    </div>
-
-</div>
-
-<script src="static/index.js"></script>
-
+<p>Login</p>
 
 {% endblock body %}

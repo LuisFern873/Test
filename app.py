@@ -4,13 +4,26 @@ from flask_migrate import Migrate
 from datetime import datetime
 import sys
 
+from flask_login import (
+    UserMixin, 
+    login_user, 
+    LoginManager, 
+    login_required, 
+    logout_user)
+
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField
+from wtforms.validators import InputRequired, Length, ValidationError
+
 app = Flask(__name__)
 db = SQLAlchemy(app)
+
 migrate = Migrate(app, db)
 
 URI = 'postgresql://postgres:conejowas12345@localhost:5432/test'
 app.config['SQLALCHEMY_DATABASE_URI'] = URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 
 class User(db.Model):
     __tablename__ = 'user'
@@ -52,17 +65,21 @@ class User(db.Model):
 def home():
     return render_template('home.html')
 
+@app.route('/register', methods=["POST","GET"])
+def register():
+    return render_template('register.html')
+
 @app.route('/login', methods=["POST","GET"])
 def login():
     return render_template('login.html')
 
-@app.route('/users', methods=["POST","GET"])
+@app.route('/users')
 def users():
     return render_template('users.html', users = User.query.all())
 
 
-@app.route('/login/user_added', methods=["POST","GET"])
-def login_new():
+@app.route('/register/user_added', methods=["POST","GET"])
+def register_new():
     error = False
     response = {}
     try:
@@ -71,23 +88,24 @@ def login_new():
         email = request.get_json()["email"]
         mobile_phone = request.get_json()["phone"]
         password = request.get_json()["password"]
+        cpassword = request.get_json()["cpassword"]
 
-        user = User(
-            full_name = full_name,
-            username = username, 
-            email = email,
-            mobile_phone = mobile_phone,
-            password = password)
+        if cpassword == password:
+            user = User(
+                full_name = full_name,
+                username = username, 
+                email = email,
+                mobile_phone = mobile_phone,
+                password = password)
 
-        db.session.add(user)
-        db.session.commit()
-        # Esta acaa
+            db.session.add(user)
+            db.session.commit()
 
-        response['fullname'] = user.full_name
-        response['username'] = user.username
-        response['email'] = user.email
-        response['phone'] = user.mobile_phone
-        response['password'] = user.password
+            response['fullname'] = user.full_name
+            response['username'] = user.username
+            response['email'] = user.email
+            response['phone'] = user.mobile_phone
+            response['password'] = user.password
 
     except Exception as exp:
         db.session.rollback()
