@@ -1,5 +1,7 @@
 ## Nombre del proyecto
 
+**Administrador ponte las pilas**
+
 ## Integrantes
 
 | Código    | Nombres y Apellidos         | Correo Institucional                                          |
@@ -8,9 +10,15 @@
 
 ## Descripción
 
+Hoy en día, muchas empresas están buscando herramientas que mejoren la productividad de su personal administrativo y empleados. En ese marco, que se requiere de software que organice sus recursos y se ajuste a sus necesidades. Es por ello que nace este proyecto que pretende solucionar estos problemas en aquellas organizaciones que buscan eficiencia.
+
 
 ## Objetivos principales / Misión / Visión
 
+El presente proyecto tiene como objetivos:
+
+- Ayudar a administradores a asignar tareas en un espacio web.
+- Otorgar flexibilidad para organizar empleados.
 
 ## Librerías / frameworks / plugins utilizados en el Front-end, Back-end y Base de datos
 
