@@ -1,8 +1,6 @@
-## Nombre del proyecto
+## Nombre del proyecto: **Administrador ponte las pilas**
 
-**Administrador ponte las pilas**
-
-## Integrantes
+## Integrantes:
 
 | Código    | Nombres y Apellidos         | Correo Institucional                                          |
 | --------- | --------------------------- | ------------------------------------------------------------- |
@@ -10,27 +8,26 @@
 | 202110394 | Jose Francisco Wong Orrillo | [jose.wong@utec.edu.pe](mailto:jose.wong@utec.edu.pe) |
 | 201820010 | Pedro Ivan Renzo Lizarbe Palacios | [pedro.lizarbe.p@utec.edu.pe](mailto:pedro.lizarbe.p@utec.edu.pe) |
 
-## Descripción
+## Descripción:
 
 Hoy en día, muchas empresas están buscando herramientas que mejoren la productividad de su personal administrativo y empleados. En ese marco, que se requiere de software que organice sus recursos y se ajuste a sus necesidades. Es por ello que nace este proyecto que pretende solucionar estos problemas en aquellas organizaciones que buscan eficiencia.
 
-
-## Objetivos principales / Misión / Visión
+## Objetivos principales / Misión / Visión:
 
 El presente proyecto tiene como objetivos:
 
 - Ayudar a administradores a asignar tareas en un espacio web.
 - Otorgar flexibilidad para organizar empleados.
 
-## Librerías / frameworks / plugins utilizados en el Front-end, Back-end y Base de datos
+## Librerías / frameworks / plugins utilizados en el Front-end, Back-end y Base de datos:
 
-## Nombre del Script a ejecutar para iniciar la base de datos con datos
+## Nombre del Script a ejecutar para iniciar la base de datos con datos:
 
-## Información acerca de los API. Requests y Responses de cada endpoint utilizado en el sistema
+## Información acerca de los API. Requests y Responses de cada endpoint utilizado en el sistema:
 
-## Hosts
+## Hosts:
 
-## Forma de autenticación
+## Forma de autenticación:
 
 ## Manejo de errores HTTP:
 - 500: Errores en el Servidor
