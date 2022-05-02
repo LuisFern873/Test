@@ -4,16 +4,16 @@ from flask_migrate import Migrate
 from datetime import datetime
 import sys
 
-from flask_login import (
-    UserMixin, 
-    login_user, 
-    LoginManager, 
-    login_required, 
-    logout_user)
+# from flask_login import (
+#     UserMixin, 
+#     login_user, 
+#     LoginManager, 
+#     login_required, 
+#     logout_user)
 
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import InputRequired, Length, ValidationError
+# from flask_wtf import FlaskForm
+# from wtforms import StringField, PasswordField, SubmitField
+# from wtforms.validators import InputRequired, Length, ValidationError
 
 app = Flask(__name__)
 db = SQLAlchemy(app)
@@ -23,7 +23,6 @@ migrate = Migrate(app, db)
 URI = 'postgresql://postgres:conejowas12345@localhost:5432/test'
 app.config['SQLALCHEMY_DATABASE_URI'] = URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 
 class User(db.Model):
     __tablename__ = 'user'
@@ -60,6 +59,7 @@ class User(db.Model):
 
     def __repr__(self):
         return "Username: {}".format(self.username)
+
 
 @app.route('/')
 def home():
