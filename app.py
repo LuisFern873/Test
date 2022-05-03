@@ -24,8 +24,8 @@ URI = 'postgresql://postgres:conejowas12345@localhost:5432/test'
 app.config['SQLALCHEMY_DATABASE_URI'] = URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-class User(db.Model):
-    __tablename__ = 'user'
+class Administrador(db.Model):
+    __tablename__ = 'Administradores'
 
     id = db.Column(
         db.Integer, 
@@ -58,7 +58,53 @@ class User(db.Model):
         default = datetime.now)
 
     def __repr__(self):
-        return "Username: {}".format(self.username)
+        return "Administrador: {}".format(self.username)
+
+# class Empleado(db.Model):
+#     __tablename__ = 'Empleados'
+
+#     dni = db.Column(
+#         db.Integer, 
+#         primary_key = True)
+    
+#     nombres = db.Column(
+#         db.varchar(50),
+#         nullable = False
+#     )
+
+#     apellidos = db.Column(
+#         db.varchar(50),
+#         nullable = False
+#     )
+
+#     genero = db.Column(
+#         db.varchar(1),
+#         nullable = False
+#     )
+
+#     def __repr__(self):
+#         return "Empleado: {}".format(self.dni)
+
+# class Tarea(db.Model):
+#     __tablename__ = 'Tareas'
+
+#     id_tarea = db.Column(
+#         db.Integer,
+#         primary_key = True
+#     )
+
+#     Titulo = db.Column(
+#         db.varchar(100),
+#         nullable = True
+#     )
+
+#     descripcion = db.Column(
+#         db.varchar(500),
+#         nullable = True
+#     )
+
+#     def __repr__(self):
+#         return "Tarea: {}".format(self.id_tarea)
 
 
 @app.route('/')
@@ -75,7 +121,7 @@ def login():
 
 @app.route('/users')
 def users():
-    return render_template('users.html', users = User.query.all())
+    return render_template('users.html', users = Administrador.query.all())
 
 
 @app.route('/register/user_added', methods=["POST","GET"])
@@ -91,21 +137,21 @@ def register_new():
         cpassword = request.get_json()["cpassword"]
 
         if cpassword == password:
-            user = User(
+            admin = Administrador(
                 full_name = full_name,
                 username = username, 
                 email = email,
                 mobile_phone = mobile_phone,
                 password = password)
 
-            db.session.add(user)
+            db.session.add(admin)
             db.session.commit()
 
-            response['fullname'] = user.full_name
-            response['username'] = user.username
-            response['email'] = user.email
-            response['phone'] = user.mobile_phone
-            response['password'] = user.password
+            response['fullname'] = admin.full_name
+            response['username'] = admin.username
+            response['email'] = admin.email
+            response['phone'] = admin.mobile_phone
+            response['password'] = admin.password
 
     except Exception as exp:
         db.session.rollback()
