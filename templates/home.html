@@ -1,11 +1,41 @@
 {% extends "base.html" %}
-{% block body %}
-  
-<h1>Login Authentication System in flask</h1>
 
-<a href="{{url_for('register')}}">Regístrate</a>
-<div></div>
-<a href="{{url_for('login')}}">¿Ya tienes una cuenta? Inicia sesión</a>
+
+{% block head %}
+
+    <!--ENLACES CSS-->
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'estilos.css') }}">
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'header.css') }}">
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'responsive.css') }}">
+
+    <!--Box Icons-->
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <!--Google fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+{% endblock head %}
+
+
+{% block body %}
+
+<header class="header" id="inicio">
+    <!--Transición-->
+    <img src="{{url_for('static',filename = 'images/wave.png')}}" alt="" class="wave">
+    <button class="button-19" role="button" >
+        <a href="{{url_for('login')}}" > Iniciar Sesión </a> 
+    </button>
+    <button class="button-18" role="button" >
+        <a href="{{url_for('register')}}" > Regístrate </a> 
+    </button>
+
+    <!--Textos e imágenes Header-->
+    <section class="textos-header">
+        <h1>Sistema de administración de empleados</h1>
+        <img src="{{url_for('static',filename = 'images/Tambo-logo.png')}}" alt="" class="logo">
+        <h2>Cada vez más cerca</h2>
+    </section>
+
+    
+</header>
 
 
 {% endblock body %}

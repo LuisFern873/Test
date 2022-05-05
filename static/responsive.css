@@ -1,0 +1,14 @@
+@media screen and (max-width:800px){
+    
+    header{
+        background-position: center;
+    }
+
+    .cupcake{
+        width: 40%;
+    }
+
+    .menu-desplegable{
+        width: 50%
+    }
+}
