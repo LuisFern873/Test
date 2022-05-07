@@ -11,28 +11,28 @@
 
 {% block body %}
 <div class="container">
-    <div class="title">Registro</div>
-    <form id = 'form' action='/register/user_added' method="POST">
+    <div class="title">Registro Administrador</div>
+    <form id = 'form' action='/register/register_user' method="POST">
         <div class="user_details">
 
             <div class="input_box">
-                <span class="details">Nombre completo:</span>
-                <input id = 'fullname' type="text" name="fullname" placeholder="Nombre completo" required/>
+                <span class="details">DNI:</span>
+                <input id = 'dni_admin' type="text" name="dni_admin" placeholder="DNI" required/>
             </div>
 
             <div class="input_box">
-                <span class="details">Nombre de usuario:</span>
-                <input id = 'username' type="text" name="username" placeholder="Nombre de usuario" required/>
+                <span class="details">Nombres:</span>
+                <input id = 'nombres' type="text" name="nombres" placeholder="Nombres" required/>
             </div>
 
             <div class="input_box">
-                <span class="details">Números de celular:</span>
-                <input id = 'phone' type="text" name="phone" placeholder="Número de celular" required/>
+                <span class="details">Apellidos:</span>
+                <input id = 'apellidos' type="text" name="apellidos" placeholder="Apellidos" required/>
             </div>
 
             <div class="input_box">
                 <span class="details">Correo electrónico:</span>
-                <input id = 'email' type="text" name="email" placeholder="Correo electrónico" required/>
+                <input id = 'correo' type="text" name="correo" placeholder="Correo electrónico" required/>
             </div>
 
             <div class="input_box">
@@ -42,7 +42,7 @@
 
             <div class="input_box">
                 <span class="details">Confirmar contraseña:</span>
-                <input id = 'cpassword' type="password" name="cpassword" placeholder="Confirmar contraseña" required/>
+                <input id = 'confirm_password' type="password" name="confirm_password" placeholder="Confirmar contraseña" required/>
             </div>
 
         </div>
@@ -70,4 +70,5 @@
 </div>
 
 <script src="static/register.js"></script>
+
 {% endblock body %}

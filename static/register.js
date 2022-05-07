@@ -1,55 +1,53 @@
 
-const fullname_input = document.getElementById('fullname')
-const username_input = document.getElementById('username')
-const email_input = document.getElementById('email')
-const phone_input = document.getElementById('phone')
+const dni_admin_input = document.getElementById('dni_admin')
+const nombres_input = document.getElementById('nombres')
+const apellidos_input = document.getElementById('apellidos')
+const correo_input = document.getElementById('correo')
 const password_input = document.getElementById('password')
-const cpassword_input = document.getElementById('cpassword')
+const confirm_password_input = document.getElementById('confirm_password')
 
 document.getElementById('form').onsubmit = function(prevent) {
     prevent.preventDefault();
-    const fullname = fullname_input.value;
-    const username = username_input.value;
-    const email = email_input.value;
-    const phone = phone_input.value;
+    const dni_admin = dni_admin_input.value;
+    const nombres = nombres_input.value;
+    const apellidos = apellidos_input.value;
+    const correo = correo_input.value;
     const password = password_input.value;
-    const cpassword = cpassword_input.value;
+    const confirm_password = confirm_password_input.value;
 
-    fetch('/register/user_added',{
+    fetch('/register/register_user',{
         method: 'POST',
         body: JSON.stringify({
-            'fullname': fullname, 
-            'username': username, 
-            'email': email, 
-            'phone': phone, 
+            'dni_admin': dni_admin, 
+            'nombres': nombres, 
+            'apellidos': apellidos, 
+            'correo': correo, 
             'password': password,
-            'cpassword': cpassword
+            'confirm_password': confirm_password
         }),
         headers: {'Content-Type': 'application/json'}})
     .then(response => response.json())
     .then(function(jsonResponse) {
-        console.log("jsonResponse: ", jsonResponse);
+        
         document.getElementById('error').className = "alert";
     
-        if (jsonResponse['password'] === cpassword)
+        if (jsonResponse['password'] === confirm_password)
         {
-            const full = document.createElement('full'); 
-            const usnm = document.createElement('usnm'); 
-            const eml = document.createElement('eml');
-            const phn = document.createElement('phn'); 
-            const pass = document.createElement('pass'); 
-            const cpass = document.createElement('cpass'); 
+            const dni = document.createElement('dni_admin'); 
+            const nom = document.createElement('nombres'); 
+            const ape = document.createElement('apellidos');
+            const cor = document.createElement('correo'); 
+            const pass = document.createElement('password'); 
     
-            full.innerHTML = jsonResponse['fullname'];
-            usnm.innerHTML = jsonResponse['username'];
-            eml.innerHTML = jsonResponse['email'];
-            phn.innerHTML = jsonResponse['phone'];
+            dni.innerHTML = jsonResponse['dni_admin'];
+            nom.innerHTML = jsonResponse['nombres'];
+            ape.innerHTML = jsonResponse['apellidos'];
+            cor.innerHTML = jsonResponse['correo'];
             pass.innerHTML = jsonResponse['password'];
-            cpass.innerHTML = jsonResponse['cpassword'];
 
-            document.getElementById('name').appendChild(full);
-            
+            document.getElementById('name').appendChild(nom);
             document.getElementById('welcome').className = "";
+
         } else
         {
             document.getElementById('changepassword').className = "";
@@ -57,6 +55,7 @@ document.getElementById('form').onsubmit = function(prevent) {
 
     })
     .catch(function(){
+        console.log("ERROR")
         document.getElementById('error').className = "";
     });
 }

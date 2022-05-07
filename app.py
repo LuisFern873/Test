@@ -46,33 +46,33 @@ def log_user():
 def users():
     return render_template('users.html', users = Administrador.query.all())
 
-@app.route('/register/user_added', methods=["POST","GET"])
+@app.route('/register/register_user', methods=["POST","GET"])
 def register_new():
     error = False
     response = {}
     try:
-        full_name = request.get_json()["fullname"]
-        username = request.get_json()["username"]
-        email = request.get_json()["email"]
-        mobile_phone = request.get_json()["phone"]
+        dni_admin = request.get_json()["dni_admin"]
+        nombres = request.get_json()["nombres"]
+        apellidos = request.get_json()["apellidos"]
+        correo = request.get_json()["correo"]
         password = request.get_json()["password"]
-        cpassword = request.get_json()["cpassword"]
+        confirm_password = request.get_json()["confirm_password"]
 
-        if cpassword == password:
+        if password == confirm_password:
             admin = Administrador(
-                full_name = full_name,
-                username = username, 
-                email = email,
-                mobile_phone = mobile_phone,
+                dni_admin = dni_admin,
+                nombres = nombres,
+                apellidos = apellidos,
+                correo = correo,
                 password = password)
 
             db.session.add(admin)
             db.session.commit()
 
-            response['fullname'] = admin.full_name
-            response['username'] = admin.username
-            response['email'] = admin.email
-            response['phone'] = admin.mobile_phone
+            response['dni_admin'] = admin.dni_admin
+            response['nombres'] = admin.nombres
+            response['apellidos'] = admin.apellidos
+            response['correo'] = admin.correo
             response['password'] = admin.password
 
     except Exception as exp:

@@ -25,16 +25,15 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 class Administrador(db.Model):
     __tablename__ = 'Administradores'
     
-    id = db.Column(db.Integer, primary_key = True)
-    full_name = db.Column(db.String(100), nullable = False)
-    username = db.Column(db.String(80), unique = True, nullable = False)
-    email = db.Column(db.String(120), unique = True, nullable = False)
-    mobile_phone = db.Column(db.String(20), nullable = False)
-    password = db.Column(db.String(200), nullable = False)
-    date_added = db.Column(db.DateTime(), default = datetime.now)
+    dni_admin = db.Column(db.String(8), primary_key = True)
+    nombres = db.Column(db.String(100), nullable = False)
+    apellidos = db.Column(db.String(100), nullable = False)
+    correo = db.Column(db.String(100), unique = True, nullable = False)
+    password = db.Column(db.String(100), nullable = False)
+    fecha_anadido = db.Column(db.DateTime(), default = datetime.now)
 
     def __repr__(self):
-        return "Administrador: {}".format(self.username)
+        return "Administrador: {}".format(self.dni_admin)
 
 class Empleado(db.Model):
     __tablename__ = 'Empleados'
@@ -57,3 +56,5 @@ class Tarea(db.Model):
 
     def __repr__(self):
         return "Tarea: {}".format(self.id_tarea)
+
+db.create_all()
