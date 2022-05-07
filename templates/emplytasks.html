@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel = "stylesheet" href = "{{ url_for('static', filename = 'emplytasks.css') }}">
+{% endblock head %}
+
+
+
+
+{% block body %}
+<div class="container">
+    <form method ="post">
+        <h1> Tareas del Empleado </h1> 
+        <div class="Tarea1">
+            <input type="checkbox" name="tarea1">Tarea 1<br>
+        </div>
+
+        <div class="Tarea2">
+            <input type="checkbox" name="tarea2">Tarea 2<br>
+        </div>
+
+        <div class="Tarea3">
+            <input type="checkbox" name="tarea3">Tarea 3<br>
+        </div>
+
+        <div class="Tarea4">
+            <input type="checkbox" name="tarea4">Tarea 4<br>
+        </div>
+
+        <div class="Tarea5">
+            <input type="checkbox" name="tarea5">Tarea 5<br>
+        </div>
+
+    
+        <input type="submit" value="Check Out">
+    </form>
+</div>
+{% endblock body %}
