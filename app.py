@@ -18,7 +18,6 @@ def login():
 def users():
     return render_template('users.html', users = Administrador.query.all())
 
-
 @app.route('/register/user_added', methods=["POST","GET"])
 def register_new():
     error = False
@@ -60,6 +59,11 @@ def register_new():
         abort(500)
     else:
         return jsonify(response)
+
+@app.route('/empleados', methods=["POST","GET"])
+def empleados():
+    return render_template('empleados.html')       
+
 
 if __name__ == "__main__":
     app.run(debug = True)

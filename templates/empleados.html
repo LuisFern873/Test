@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'empleados.css') }}">
+    <!--Box Icons-->
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <!--Google fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+{% endblock head %}
+
+
+{% block body %}
+<div class="container">
+    <div class="box">
+        <img src="" alt="">
+        <h2>Ficha Empleado</h2>
+        <li>Dni:</li>
+        <li>Nombres:</li>
+        <li>Apellidos:</li>
+        <li>Género:</li>
+    </div>
+</div>
+{% endblock body %}
