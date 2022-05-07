@@ -1,3 +1,4 @@
+from cmath import exp
 from flask import render_template,request,abort,jsonify
 from models import *
 import sys
@@ -13,6 +14,33 @@ def register():
 @app.route('/login', methods=["POST","GET"])
 def login():
     return render_template('login.html')
+
+@app.route('/addemply', methods=["POST","GET"])
+def addemply():
+    return render_template('addemply.html')
+
+@app.route('/login/log_user', methods=["GET"])
+def log_user():
+    error = False
+    response = {}
+    username = request.args.get("username")
+    password = request.args.get("password")
+
+    user = Empleado.query.filter_by(username=username).first()
+    if user != None and user.password == password:
+            print('A')
+    else:
+        admin = Administrador.query.filter_by(username=username).first()
+        if admin != None and admin.password == password:
+            print('A')
+        else:
+            error = True
+            print(exp)
+    
+    if error:
+        abort(500)
+    else:
+        return jsonify(response)
 
 @app.route('/users')
 def users():

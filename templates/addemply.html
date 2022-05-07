@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel = "stylesheet" href = "{{ url_for('static', filename = 'addemply.css') }}">
+{% endblock head %}
+
+
+{% block body %}
+<header class = "header">
+
+</header>
+<div class="center">
+    <h1>AGREGAR EMPLEADO</h1>
+    <form method="post">
+        <div class="txt_field">
+            <input type="number" required>
+            <span></span>
+            <label>DNI</label>
+        </div>
+        <div class="txt_field">
+            <input type="text" required>
+            <span></span>
+            <label>Nombres</label>
+        </div>
+        <div class="txt_field">
+            <input type="text" required>
+            <span></span>
+            <label>Apellidos</label>
+        </div>
+        <div class="txt_field">
+            <input type="text" required>
+            <span></span>
+            <label>Género</label>
+        </div>
+        <input type="submit" value="Agregar">
+    </form>
+</div>
+
+
+{% endblock body %}
