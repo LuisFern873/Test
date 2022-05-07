@@ -93,6 +93,10 @@ def empleados():
     return render_template('empleados.html')       
 
 
+@app.route('/tareas', methods = ['POST','GET'])
+def tareas():
+    return render_template("emplytasks.html")
+
 if __name__ == "__main__":
     app.run(debug = True)
 
