@@ -3,6 +3,25 @@ from flask import render_template,request,abort,jsonify
 from models import *
 import sys
 
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres@localhost:5432/activitiestd'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+
+
+
+class Add(db.Model):
+    __tablename__ = 'activities'
+    id = db.Column(db.Integer, primary_key=True)
+    description = db.Column(db.String(), nullable=False)
+    dni = db.Column(db.Integer(), nullable=False)
+    def __repr__(self):
+        return f'Todo: id={self.id}, description={self.description}'
+
+db.create_all()
+
 @app.route('/')
 def home():
     return render_template('home.html')
@@ -18,6 +37,19 @@ def login():
 @app.route('/addemply', methods=["POST","GET"])
 def addemply():
     return render_template('addemply.html')
+
+@app.route('/add', methods=["POST","GET"])
+def add():
+    return render_template('admin-activities.html')
+
+@app.route('/add/newactivitie', methods=["POST"])
+def add_activities():
+    description= request.form.get('activitie',"")
+    dni = request.form['dni']
+    add = Add(description=description,dni=dni)
+    db.session.add(add)
+    db.session.commit()
+    return render_template('admin-activities.html')
 
 @app.route('/login/log_user', methods=["GET"])
 def log_user():
