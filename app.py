@@ -15,6 +15,10 @@ def register():
 def login():
     return render_template('login.html')
 
+@app.route('/addemply', methods=["POST","GET"])
+def addemply():
+    return render_template('addemply.html')
+
 @app.route('/login/log_user', methods=["GET"])
 def log_user():
     error = False
