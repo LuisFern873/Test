@@ -26,12 +26,12 @@ def log_user():
     username = request.args.get("username")
     password = request.args.get("password")
 
-    user = Empleado.query.filter_by(username=username).first()
-    if user != None and user.password == password:
-            print('A')
+    admin = Administrador.query.filter_by(username = username).first()
+    if admin != None and admin.password == password:
+            print('A')      
     else:
-        admin = Administrador.query.filter_by(username=username).first()
-        if admin != None and admin.password == password:
+        user = Empleado.query.filter_by(dni_empleado = username).first()
+        if user != None and user.password == password:
             print('A')
         else:
             error = True
@@ -92,6 +92,10 @@ def register_new():
 def empleados():
     return render_template('empleados.html')       
 
+
+@app.route('/tareas', methods = ['POST','GET'])
+def tareas():
+    return render_template("emplytasks.html")
 
 if __name__ == "__main__":
     app.run(debug = True)
