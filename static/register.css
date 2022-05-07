@@ -2,10 +2,10 @@
 
 *
 {
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
 }
 
 body
@@ -14,8 +14,16 @@ body
     height: 100vh;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg,#71b7e6,#9b59b6);
+
+    background: -webkit-linear-gradient(to right, hsla(220, 52%, 70%, 0.863), hsla(274, 45%, 71%, 0.808)), url(images/Tambo-portada.jpg);
+    background: linear-gradient(to right, #8ca6dbd0, #b993d6bd), url(images/Tambo-portada.jpg); 
+    background-attachment: absolute;
+    position: relative;
+    background-size: cover;
+    
 }
+
+
 
 .container 
 {
@@ -62,9 +70,11 @@ form .user_details .input_box
 
 .user_details .input_box .details
 {
+    
     display: block;
     font-weight: 500;
     margin-bottom: 5px;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* Styles of Input Box */
