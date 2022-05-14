@@ -1,9 +1,9 @@
-from cmath import exp
-from flask import render_template,request,abort,jsonify
+from ntpath import join
+from flask import render_template,request,abort,jsonify,redirect,url_for,make_response
 from models import *
 import sys
 
-# Controller
+# Controllers
 
 @app.route('/')
 def home():
@@ -17,33 +17,24 @@ def register():
 def login():
     return render_template('login.html')
 
-@app.route('/addemply', methods=["POST","GET"])
-def addemply():
-    return render_template('addemply.html')
-
-@app.route('/login/log_user', methods=["GET"])
-def log_user():
-    error = False
-    response = {}
-    dni_admin = request.args.get("dni_admin")
-    dni_empleado = request.args.get("dni_admin")
-    password = request.args.get("password")
-
-    admin = Administrador.query.filter_by(dni_admin = dni_admin).first()
-    if admin != None and admin.password == password:
-            return render_template('pruebalog.html')  
-    else:
-        user = Empleado.query.filter_by(dni_empleado = dni_empleado).first()
-        if user != None and user.password == password:
-            return render_template('pruebalog.html')
-        else:
-            error = True
-            print(exp)
+@app.route('/login/log_admin', methods=["POST","GET"])
+def log_admin():
     
-    if error:
-        abort(500)
-    else:
+    response = {}
+
+    dni_admin = request.get_json()["dni_admin_login"]
+    password = request.get_json()["password_login"]
+    
+    admin = Administrador.query.filter_by(dni_admin = dni_admin).first()
+
+    if admin != None and admin.password == password:
+        response["dni_admin"] = admin.dni_admin
+        response["password"] = admin.password
+
         return jsonify(response)
+    else:
+        # Enviar un mensaje: ¡Combinación de DNI/contraseña inválida! 
+        return '¡Combinación de DNI/contraseña inválida!'
 
 @app.route('/administradores')
 def administradores():

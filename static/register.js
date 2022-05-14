@@ -17,6 +17,10 @@ document.getElementById('form').onsubmit = function(prevent)
     const confirm_password = confirm_password_input.value;
 
     fetch('/register/register_user',{
+        headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
         method: 'POST',
         body: JSON.stringify({
             'dni_admin': dni_admin, 
@@ -25,8 +29,8 @@ document.getElementById('form').onsubmit = function(prevent)
             'correo': correo, 
             'password': password,
             'confirm_password': confirm_password
-        }),
-        headers: {'Content-Type': 'application/json'}})
+        })
+    })
     .then(response => response.json())
     .then(function(jsonResponse) {
         

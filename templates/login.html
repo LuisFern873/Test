@@ -9,19 +9,26 @@
 
 <div class="center">
     <h1>Login</h1>
-    <form id="form" action="/login/log_user"  method="get">
+    <form id="form-login" action="/login/log_admin"  method="POST">
         <div class="txt_field">
-            <input id="dni_admin" type="text" required>
+            <input id="dni_admin_login" type="text" required>
             <span></span>
             <label>DNI del Administrador</label>
         </div>
         <div class="txt_field">
-            <input id="password" type="password" required>
+            <input id="password_login" type="password" required>
+            
             <span></span>
             <label>Constraseña</label>
         </div>
         <input type="submit" value="Inicia Sesión">
     </form>
+
+</div>
+<!-- Error alert button -->
+<div id="error" class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    ¡Combinación de DNI/contraseña inválida!
 </div>
 
 <script src="static/login.js"></script>
