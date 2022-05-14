@@ -20,23 +20,28 @@
 <header class="header" id="inicio">
     <!--Transición-->
     <img src="{{url_for('static',filename = 'images/wave.png')}}" alt="" class="wave">
-    <button class="button-19" role="button" >
-        <a href="{{url_for('login')}}" > Iniciar Sesión </a> 
-    </button>
-    <button class="button-18" role="button" >
-        <a href="{{url_for('register')}}" > Regístrate </a> 
-    </button>
 
     <!--Textos e imágenes Header-->
-    <section class="textos-header">
-        <h1>Sistema de administración de empleados</h1>
-        <img src="{{url_for('static',filename = 'images/Tambo-logo.png')}}" alt="" class="logo">
-        <h2>Cada vez más cerca</h2>
-    </section>
-
+    <div class="container">
+        <section class="textos-header">
+            <h1>Sistema de administración de empleados</h1>
+            <img src="{{url_for('static',filename = 'images/Tambo-logo.png')}}" alt="" class="logo">
+            <h2>Cada vez más cerca</h2>
+        </section>
+    
+        <div class="botones">
+            <a href="{{url_for('login')}}">
+                <button class="button-19" role="button">Iniciar Sesión</button>
+            </a>
+            <a href="{{url_for('register')}}">
+                <button class="button-18" role="button">Regístrate</button>
+            </a> 
+        </div>
+    </div>
     
 </header>
 
+<script src="static/register.js"></script>
 
 {% endblock body %}
 

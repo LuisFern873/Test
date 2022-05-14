@@ -17,6 +17,11 @@ header{
     background-size: cover;
 }
 
+.container
+{
+  margin-top: -20px;
+}
+
 /* Logo y textos del encabezado */
 header .textos-header{
     /* Márgenes */
@@ -55,6 +60,14 @@ header .textos-header{
 }
 
 
+.botones
+{
+  justify-content: center;
+  flex-direction: center;
+  text-align: center;
+  margin-top: 20px;
+}
+
 /* CSS */
 .button-19 {
 
@@ -89,15 +102,8 @@ header .textos-header{
   white-space: nowrap;
   width: 13%;
 
+  margin-right: 60px;
   
-
-  margin-right: 10px;
-  margin-top: 10px;
-
-  position: absolute;
-  top: 0;
-  right: 0;
-
 }
 
 .button-19 > a {
@@ -166,16 +172,6 @@ header .textos-header{
     vertical-align: middle;
     white-space: nowrap;
     width: 13%;
-  
-    
-  
-    margin-right: 200px;
-    margin-top: 10px;
-  
-    position: absolute;
-    top: 0;
-    right: 0;
-  
   }
   
   .button-18 > a {
@@ -195,6 +191,7 @@ header .textos-header{
     right: 0;
     top: 0;
     z-index: -1;
+
   }
   
   .button-18:main,

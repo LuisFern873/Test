@@ -42,6 +42,9 @@ class Empleado(db.Model):
     nombres = db.Column(db.String(50), nullable = False)
     apellidos = db.Column(db.String(50), nullable = False)
     genero = db.Column(db.String(1), nullable = False)
+    fecha_anadido = db.Column(db.DateTime(), default = datetime.now)
+
+    # tareas = db.relationship('Tarea', backref='empleado', lazy = True)
 
     def __repr__(self):
         return "Empleado: {}".format(self.dni_empleado)
@@ -53,6 +56,8 @@ class Tarea(db.Model):
     titulo = db.Column(db.String(50), nullable = True)
     descripcion = db.Column(db.String(500), nullable = True)
     completo = db.Column(db.Boolean, default = False)
+
+    # asignado = db.Column(db.Integer, db.ForeignKey('Empleado.dni'))
 
     def __repr__(self):
         return "Tarea: {}".format(self.id_tarea)

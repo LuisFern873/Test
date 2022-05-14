@@ -6,7 +6,8 @@ const correo_input = document.getElementById('correo')
 const password_input = document.getElementById('password')
 const confirm_password_input = document.getElementById('confirm_password')
 
-document.getElementById('form').onsubmit = function(prevent) {
+document.getElementById('form').onsubmit = function(prevent)
+{
     prevent.preventDefault();
     const dni_admin = dni_admin_input.value;
     const nombres = nombres_input.value;

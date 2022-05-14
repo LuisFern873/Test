@@ -2,6 +2,7 @@
 
 {% block head %}
     <link rel = "stylesheet" href = "{{ url_for('static', filename = 'empleados.css') }}">
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'estilos.css') }}">
     <!--Box Icons-->
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
     <!--Google fonts-->
@@ -10,14 +11,184 @@
 
 
 {% block body %}
+
+<section class="textos-header">
+    <h2>Lista de empleados</h2>
+</section>
+
+<div class="anadir">
+    <button id="show-form" class="boton-anadir" role="button">Añadir empleado</button>
+</div>
+
 <div class="container">
-    <div class="box">
-        <img src="" alt="">
-        <h2>Ficha Empleado</h2>
-        <li>Dni:</li>
-        <li>Nombres:</li>
-        <li>Apellidos:</li>
-        <li>Género:</li>
+    
+    {% for empleado in empleados %}
+        <div class="box" id="{{empleado.dni_empleado}}">
+            {% if empleado.genero == 'M' %}
+                <img src="{{url_for('static',filename = 'images/empleado_hombre.png')}}" alt="">
+            {% else %}
+                <img src="{{url_for('static',filename = 'images/empleado_mujer.png')}}" alt="">
+            {% endif %}
+
+            <div class="details">
+                <h3>Ficha Empleado</h3>
+                <li id="edit-dni-{{empleado.dni_empleado}}">Dni: {{empleado.dni_empleado}}</li>
+                <li id="edit-nombres-{{empleado.dni_empleado}}">Nombres: {{empleado.nombres}}</li>
+                <li id="edit-apellidos-{{empleado.dni_empleado}}">Apellidos: {{empleado.apellidos}}</li>
+                <li>Género: {{empleado.genero}}</li>
+            </div>
+            <div class="botones">
+                <button id="{{empleado.dni_empleado}}" class="boton-tarea" role="button" >Asignar Tarea</button>
+                <button id="{{empleado.dni_empleado}}" class="boton-eliminar" role="button">Eliminar</button>
+                <button id="{{empleado.dni_empleado}}" class="boton-editar" role="button" >Editar</button>
+            </div>
+        </div>
+    {% endfor %}
+
+
+    <div class="box" id="new-box">
+        <div id="hombre">
+            <img src="{{url_for('static',filename = 'images/empleado_hombre.png')}}" alt="">
+        </div>
+        <div id="mujer">
+            <img src="{{url_for('static',filename = 'images/empleado_mujer.png')}}" alt="">
+        </div>
+        <div class="details">
+            <h3>Ficha Empleado</h3>
+            <li id="new_id">Dni: </li>
+            <li id="new_nombres">Nombres: </li>
+            <li id="new_apellidos">Apellidos: </li>
+            <li id="new_genero">Género: </li>
+        </div>
+        <div class="botones">
+            <button class="boton-tarea" role="button" >Asignar Tarea</button>
+            <button class="boton-eliminar" role="button">Eliminar</button>
+            <button class="boton-editar" role="button" >Editar</button>
+        </div>
+    </div>
+    <!-- Avisos -->
+
+    <!-- Añadir -->
+    <div id="welcome" class="ad">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <a>¡Empleado agregado exitosamente!</a>
+    </div>
+    <!-- Eliminar -->
+    <div id="eliminar" class="del">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <a>¡Empleado eliminado exitosamente!</a>
+    </div>
+    <!-- No eliminar -->
+    <div id="error" class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        ¡No puede eliminar a un empleado recién añadido!
+    </div>
+    <!-- Actualizar -->
+    <div id="success-edit" class="success-edit-alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <a>¡Empleado actualizado exitosamente!</a>
+    </div>
+    
+</div>
+
+<div class="popup-form">
+    <div class="popup">
+        <div class="closebtn">&times;</div>
+        <form class="form" id="form-add" action="/empleados/new_empleado" method="POST">
+            <h2>Ingrese los datos del empleado</h2>
+            <div class="form-element">
+                <label for="dni">Dni:</label>
+                <input type="text" id="dni_empleado" placeholder="Dni">
+            </div>
+            <div class="form-element">
+                <label for="nombres">Nombres:</label>
+                <input type="text" id="nombres" placeholder="Nombres">
+            </div>
+            <div class="form-element">
+                <label for="apellidos">Apellidos:</label>
+                <input type="text" id="apellidos" placeholder="Apellidos">
+            </div>
+            <div class="form-element">
+                <label for="genero">Género:</label>
+                Femenino: <input type="radio" name="gender" id="female" value='F'>
+                Masculino: <input type="radio" name="gender" id="male" value='M'>
+            </div>
+            <div class="form-element">
+                <a>
+                    <button class="boton-aceptar" role="button" >Aceptar</button>
+                </a>
+            </div>
+    
+        </form>
     </div>
 </div>
+
+<div class="popup-form-task">
+    <div class="popup">
+        <div class="closebtn">&times;</div>
+        <!-- CAMBIAR ACTION!!!!!!!!!!!!!!!!!!!1 -->
+        <form class="form" id="form-task" action="/empleados/new_empleado" method="POST">
+            <h2>Ingrese los datos de la tarea</h2>
+            <div class="form-element">
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" placeholder="Título">
+            </div>
+            <div class="form-element">
+                <label for="descripcion">Descripción:</label>
+                <textarea rows = "5" cols = "41" id = "descripcion"></textarea>
+            </div>
+            <div class="form-element">
+                <a>
+                    <button class="boton-aceptar" role="button" >Asignar</button>
+                </a>
+            </div>
+    
+        </form>
+    </div>
+</div>
+
+<div class="popup-form-edit">
+    <div class="popup">
+        <div class="closebtn">&times;</div>
+        <form class="form" id="form-edit" action="/empleados/update_empleado" method="POST">
+            <h2>¿Qué dato necesitas editar?</h2>
+            <div class="form-element">
+                <li>DNI <input type="radio" name="gender" id="radio_dni" value='dni'></li>
+                <li>Nombres <input type="radio" name="gender" id="radio_nombres" value='nombres'></li>
+                <li>Apellidos <input type="radio" name="gender" id="radio_apellidos" value='apellidos'></li>
+            </div>
+            <div class="popup-form-edit-dni" id="popup-form-edit-dni">
+                <div class="form-element">
+                    <h2>Ingresa el nuevo dni</h2>
+                    <input type="text" id="nuevo_dni" placeholder="DNI">
+                </div>
+            </div>
+            <div class="popup-form-edit-nombres" id="popup-form-edit-nombres">
+                <div class="form-element">
+                    <h2>Ingresa los nuevos nombres</h2>
+                    <input type="text" id="nuevos_nombres" placeholder="Nombres">
+                </div>
+            </div>
+            <div class="popup-form-edit-apellidos" id="popup-form-edit-apellidos">
+                <div class="form-element">
+                    <h2>Ingresa los nuevos apellidos</h2>
+                    <input type="text" id="nuevos_apellidos" placeholder="Apellidos">
+                </div>
+            </div>
+
+            <div class="form-element">
+                <button class="boton-editar-dato" role="button" >Editar</button>
+            </div>
+    
+        </form>
+    </div>
+</div>
+
+
+
+
+
+<script src="static/popup.js"></script>
+<script src="static/empleados.js"></script>
+
 {% endblock body %}
