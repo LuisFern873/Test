@@ -1,5 +1,5 @@
 from cmath import exp
-from flask import render_template,request,abort,jsonify,url_for,redirect
+from flask import render_template,request,abort,jsonify
 from models import *
 import sys
 
@@ -20,6 +20,8 @@ def login():
 @app.route('/addemply', methods=["POST","GET"])
 def addemply():
     return render_template('addemply.html')
+
+
 
 @app.route('/login/log_user', methods=["GET"])
 def log_user():
