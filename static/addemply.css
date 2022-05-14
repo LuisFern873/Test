@@ -9,6 +9,18 @@ body{
     overflow: hidden;
 }
 
+.textos-header
+{
+    margin-top: 10px;
+    text-align: center;
+}
+.textos-header h2
+{
+    font-family: 'Lobster', cursive;
+    font-size: 50px;
+    color: #fff;
+}
+
 .center{
     position: absolute;
     top: 50%;

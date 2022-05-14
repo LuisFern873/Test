@@ -1,5 +1,5 @@
 
-document.querySelector(".anadir").addEventListener(
+document.getElementById("show-form").addEventListener(
     "click", function(){
         document.querySelector(".popup-form").classList.add("active");
     } 

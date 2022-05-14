@@ -43,6 +43,7 @@ class Empleado(db.Model):
     apellidos = db.Column(db.String(50), nullable = False)
     genero = db.Column(db.String(1), nullable = False)
     fecha_anadido = db.Column(db.DateTime(), default = datetime.now)
+    fecha_modificado = db.Column(db.DateTime(), nullable = True)
 
     # tareas = db.relationship('Tarea', backref='empleado', lazy = True)
 

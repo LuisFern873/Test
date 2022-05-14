@@ -22,6 +22,7 @@ body{
     transform: translate(-50%, -50%);
     width: 400px;
     border-radius: 10px;
+    background-color: white;
 }
 
 .center h1{

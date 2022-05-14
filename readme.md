@@ -1,4 +1,4 @@
-## Nombre del proyecto: **Administrador ponte las pilas**
+## Nombre del proyecto: **Sistema de administración de empleados TAMBO**
 
 ## Integrantes:
 
@@ -10,22 +10,42 @@
 | 201820010 | Jean Franco Aquino Rojas | [jean.aquino@utec.udu.pe](mailto:jean.aquino@utec.udu.pe) |
 ## Descripción:
 
-Hoy en día, muchas empresas están buscando herramientas que mejoren la productividad de su personal administrativo y empleados. En ese marco, que se requiere de software que organice sus recursos y se ajuste a sus necesidades. Es por ello que nace este proyecto que pretende solucionar estos problemas en aquellas organizaciones que buscan eficiencia.
+Hoy en día, muchas empresas están buscando herramientas que mejoren la productividad de su personal administrativo y empleados. En ese marco, que se requiere de software que organice sus recursos y se ajuste a sus necesidades. Es por ello que nace este proyecto que pretende solucionar estos problemas en aquellas organizaciones que buscan eficiencia. Entre estas se encuentra la cadena de tiendas Tambo+, siendo nuestro proyecto a quien va dirigido.
 
 ## Objetivos principales / Misión / Visión:
 
+Misión
+
+- 
+
+Visión
+
+- 
+
 El presente proyecto tiene como objetivos:
 
-- Ayudar a administradores a asignar tareas en un espacio web.
-- Otorgar flexibilidad para organizar empleados.
+- Ayudar a administradores de tiendas Tambo a asignar tareas en un espacio web.
+- Otorgar flexibilidad y eficiencia para organizar empleados.
 
 ## Librerías / frameworks / plugins utilizados en el Front-end, Back-end y Base de datos:
+
+### Front-end:
+
+### Back-end:
+
+- SQLalchemy
+
+### Base de datos:
+
+- PostgreSQL (servidor con acceso remoto)
 
 ## Nombre del Script a ejecutar para iniciar la base de datos con datos:
 
 ## Información acerca de los API. Requests y Responses de cada endpoint utilizado en el sistema:
 
 ## Hosts:
+
+Para efectos de nuestro proyecto, utilizamos el localhost.
 
 ## Forma de autenticación:
 

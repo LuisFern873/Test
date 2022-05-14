@@ -21,8 +21,6 @@ def login():
 def addemply():
     return render_template('addemply.html')
 
-
-
 @app.route('/login/log_user', methods=["GET"])
 def log_user():
     error = False
@@ -92,10 +90,14 @@ def register_user():
     else:
         return jsonify(response)
 
+# Endpoint donde se muestra la lista de empleados
+
 @app.route('/empleados', methods=["POST","GET"])
 def empleados():
     empleados = Empleado.query.order_by('fecha_anadido').all()
     return render_template('empleados.html', empleados = empleados)
+
+# Endpoint para agregar a un empleado
 
 @app.route('/empleados/new_empleado', methods=["POST","GET"])
 def new_empleado():
@@ -134,6 +136,8 @@ def new_empleado():
     else:
         return jsonify(response)
 
+# Endpoint para eliminar a un empleado a partir de su DNI
+
 @app.route('/empleados/delete_empleado/<dni>', methods=['DELETE'])
 def delete_empleado(dni):
     error = False
@@ -157,6 +161,8 @@ def delete_empleado(dni):
     else:
         return jsonify(response)
 
+# Endpoint para actualizar los datos de un empleado a partir de su DNI
+
 @app.route('/empleados/update_empleado/<dni>', methods=['GET','POST'])
 def update_empleado(dni):
     error = False
@@ -175,6 +181,8 @@ def update_empleado(dni):
             empleado.update({'nombres': edit_nombres})
         if edit_apellidos != "":
             empleado.update({'apellidos': edit_apellidos})
+        
+        empleado.update({'fecha_modificado': datetime.now()})
         
         db.session.commit()
 
@@ -195,7 +203,8 @@ def update_empleado(dni):
 
 @app.route('/tareas', methods = ['POST','GET'])
 def tareas():
-    return render_template("emplytasks.html")
+    tareas = Tarea.query.all()
+    return render_template("emplytasks.html", tareas = tareas)
 
 
 if __name__ == "__main__":

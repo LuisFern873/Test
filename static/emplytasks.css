@@ -15,6 +15,18 @@ body{
     background-size: cover;
 }
 
+.textos-header
+{
+    margin-top: 10px;
+    text-align: center;
+}
+.textos-header h2
+{
+    font-family: 'Lobster', cursive;
+    font-size: 50px;
+    color: #fff;
+}
+
 .container{
     position: absolute;
     top: 50%;
@@ -25,7 +37,7 @@ body{
     border-radius: 20px;
 }
 
-.container h1{
+.container h2{
     text-align: center;
     padding: 0 0 20px 0;
     border-bottom: 1px solid silver;
@@ -34,6 +46,8 @@ body{
 .container form{
     padding: 0 40px;
     box-sizing: border-box;
+    width: 100%;
+    flex-direction: row;
 }
 
 input[type="submit"]{

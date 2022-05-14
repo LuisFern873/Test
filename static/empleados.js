@@ -1,4 +1,7 @@
 
+
+// Código javascript para agregar empleados
+
 const dni_empleado_input = document.getElementById('dni_empleado')
 const nombres_input = document.getElementById('nombres')
 const apellidos_input = document.getElementById('apellidos')
@@ -59,6 +62,8 @@ document.getElementById('form-add').onsubmit = function(prevent)
     });
 }
 
+// Código javascript para eliminar empleados
+
 const empleados = document.querySelectorAll('.boton-eliminar')
 
 for(let i = 0; i < empleados.length; i++)
@@ -83,6 +88,8 @@ for(let i = 0; i < empleados.length; i++)
         });
     }
 }
+
+// Código javascript para actualizar datos de los empleados
 
 document.getElementById('radio_dni').onclick = function()
 {
@@ -168,3 +175,6 @@ document.getElementById('form-edit').onsubmit = function(prevent)
             console.log("Error");
         });
 }
+
+// Código javascript para asignar tareas a los empleados
+
