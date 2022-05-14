@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<head>
+	<title>Admin - Tareas</title>
+
+	<link rel="stylesheet" href= "{{ url_for('static', filename = 'admin-activities.css') }}">
+</head>
+<body>
+	
+	<header>
+		<h1>DESIGNAR ACTIVIDAD</h1>
+		<form action="/add/newactivitie" id="new-task-form" method="post">
+			<input 
+				type="text" 
+				name="activitie" 
+				id="activitie" 
+				placeholder="Describe la tarea" />
+			
+			<input 
+				type="number" 
+				name="dni" 
+				id="dni" 
+				placeholder="Ingre el dni del empleado" />
+			<input 
+				type="submit"
+				id="new-task-submit" 
+				value="Add task" />
+		</form>
+	</header>
+	<main>
+		<section class="task-list">
+			<h2>Tasks</h2>
+
+			<div id="tasks">
+
+				<!-- <div class="task">
+					<div class="content">
+						<input 
+							type="text" 
+							class="text" 
+							value="A new task"
+							readonly>
+					</div>
+					<div class="actions">
+						<button class="edit">Edit</button>
+						<button class="delete">Delete</button>
+					</div>
+				</div> -->
+
+			</div>
+		</section>
+	</main>
+
+	<script src="{{ url_for('static', filename = 'main.js') }}"></script>
+</body>
+</html>
