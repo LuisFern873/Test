@@ -16,7 +16,7 @@ Hoy en día, muchas empresas están buscando herramientas que mejoren la product
 
 Misión
 
-- 
+- Ayudar a administradores de tiendas Tambo a asignar tareas en un espacio web.
 
 Visión
 
@@ -31,13 +31,22 @@ El presente proyecto tiene como objetivos:
 
 ### Front-end:
 
+Para el front-end se utilizaron las siguientes tecnologías:
+
+- HTML
+- CSS
+
 ### Back-end:
 
+Para el back-end se utilizaron las siguientes tecnologías:
+
+- 
 - SQLalchemy
+- flask_migrate
 
 ### Base de datos:
 
-- PostgreSQL (servidor con acceso remoto)
+- PostgreSQL (servidor alojado en la plataforma Heroku)
 
 ## Nombre del Script a ejecutar para iniciar la base de datos con datos:
 
