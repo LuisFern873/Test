@@ -11,17 +11,19 @@
     <h1>Login</h1>
     <form id="form" action="/login/log_user"  method="get">
         <div class="txt_field">
-            <input type="text" required>
+            <input id="dni_admin" type="text" required>
             <span></span>
-            <label>Nombre de Usuario</label>
+            <label>DNI del Administrador</label>
         </div>
         <div class="txt_field">
-            <input type="password" required>
+            <input id="password" type="password" required>
             <span></span>
             <label>Constraseña</label>
         </div>
         <input type="submit" value="Inicia Sesión">
     </form>
 </div>
+
+<script src="static/login.js"></script>
 
 {% endblock body %}
