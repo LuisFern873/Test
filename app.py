@@ -25,16 +25,17 @@ def addemply():
 def log_user():
     error = False
     response = {}
-    username = request.args.get("username")
+    dni_admin = request.args.get("dni_admin")
+    dni_empleado = request.args.get("dni_admin")
     password = request.args.get("password")
 
-    admin = Administrador.query.filter_by(username = username).first()
+    admin = Administrador.query.filter_by(dni_admin = dni_admin).first()
     if admin != None and admin.password == password:
-            print('A')      
+            return render_template('pruebalog.html')  
     else:
-        user = Empleado.query.filter_by(dni_empleado = username).first()
+        user = Empleado.query.filter_by(dni_empleado = dni_empleado).first()
         if user != None and user.password == password:
-            print('A')
+            return render_template('pruebalog.html')
         else:
             error = True
             print(exp)
