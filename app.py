@@ -196,8 +196,31 @@ def update_empleado(dni):
 @app.route('/tareas', methods = ['POST','GET'])
 def tareas():
     tareas = Tarea.query.all()
-    return render_template("emplytasks.html", tareas = tareas)
+    return render_template("tareas.html", tareas = tareas)
 
+
+@app.route('/empleados/asignar_tarea/<dni>', methods = ['POST','GET'])
+def asignar_tarea(dni):
+
+    # Recuperar datos de la tarea
+    titulo = request.get_json()["titulo"]
+    descripcion = request.get_json()["descripcion"]
+
+    # Empleado al que le vamos a asignar la tarea
+    empleado = Empleado.query.filter_by(dni_empleado = dni).first()
+
+    # Creamos la tarea
+    tarea = Tarea(
+        titulo = titulo,
+        descripcion = descripcion,
+        completo = False,
+        empleado = empleado
+    )
+    # Añadimos la tarea
+    db.session.add(tarea)
+    db.session.commit()
+
+    return jsonify({'titulo': titulo, 'descripcion': descripcion})
 
 if __name__ == "__main__":
     app.run(debug = True)

@@ -1,41 +1,29 @@
 {% extends "base.html" %}
 
 {% block head %}
-<link rel = "stylesheet" href = "{{ url_for('static', filename = 'addemply.css') }}">
+<link rel = "stylesheet" href = "{{ url_for('static', filename = 'tareas.css') }}">
 {% endblock head %}
 
 
 {% block body %}
+
 <section class="textos-header">
     <h2>Lista de tareas</h2>
 </section>
 
-<div class="center">
-    <h1>AGREGAR EMPLEADO</h1>
-    <form method="post">
-        <div class="txt_field">
-            <input type="number" required>
-            <span></span>
-            <label>DNI</label>
-        </div>
-        <div class="txt_field">
-            <input type="text" required>
-            <span></span>
-            <label>Nombres</label>
-        </div>
-        <div class="txt_field">
-            <input type="text" required>
-            <span></span>
-            <label>Apellidos</label>
-        </div>
-        <div class="txt_field">
-            <input type="text" required>
-            <span></span>
-            <label>Género</label>
-        </div>
-        <input type="submit" value="Agregar">
-    </form>
-</div>
+<div class="container">
 
+    {% for tarea in tareas %}
+    <div class="box">
+        <div class="details">
+            <h2>Tarea: {{tarea.titulo}}</h2> 
+            <p>Descripción: {{tarea.descripcion}}</p>
+        </div>
+        <input type="checkbox" name="">
+        <input type="submit" value="Eliminar">
+    </div>
+    {% endfor %}
+
+</div>
 
 {% endblock body %}

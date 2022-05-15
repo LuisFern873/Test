@@ -6,8 +6,7 @@ body{
     font-family: 'Poppins',sans-serif;
     background: linear-gradient(120deg, #2980b9, #8e44ad);
     height: 100vh;
-    overflow: hidden;
-
+    
     background: -webkit-linear-gradient(to right, hsla(220, 52%, 70%, 0.863), hsla(274, 45%, 71%, 0.808)), url(images/Tambo-portada.jpg);
     background: linear-gradient(to right, #8ca6dbd0, #b993d6bd), url(images/Tambo-portada.jpg); 
     background-attachment: absolute;
@@ -28,14 +27,10 @@ body{
 }
 
 .container{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 600px;
-    background: white;
-    border-radius: 20px;
-
+    display: block;
+    overflow: auto;
+    
+    margin-top: 50px;
     display: flex;
     flex-direction: column-reverse;
     
@@ -44,22 +39,50 @@ body{
     text-align: center;
 }
 
-.container h2{
+.container .box {
+    padding: 40px;
+    margin: 10px;
+    width: 1000spx;
+    height: 50px;
+    box-shadow: -1px 0 5px #000;
+ 
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding: 0 0 20px 0;
+    
+    background: rgb(177,34,195);
+    background: linear-gradient(63deg, rgba(177,34,195,1) 0%, rgba(248,253,45,1) 100%);
+    margin-bottom: 20px;
+}
+
+.container h2{
+    text-align: left;
     border-bottom: 1px solid silver;
 }
 
-.container form{
+.container p{
+    text-align: left;
+}
+
+.details
+{
+    width: 800px;
+}
+.container form
+{
     padding: 0 40px;
     box-sizing: border-box;
     width: 100%;
     flex-direction: row;
 }
 
-input[type="submit"]{
+input[type="submit"]
+{
     margin: 30px 0;
-    width: 100%;
+    width: 200px;
     height: 50px;
     border: 1px solid;
     background: #2691d9;
@@ -69,4 +92,10 @@ input[type="submit"]{
     font-weight: 700;
     cursor: pointer;
     outline: none;
+}
+
+input[type="checkbox"]
+{
+    width: 50px;
+    height: 50px;
 }

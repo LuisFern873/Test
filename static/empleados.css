@@ -44,7 +44,6 @@ body
     align-items: center; /* -> center <- */
     justify-content: flex-end;
     text-align: center;
-
 }
 
 .container .box {
@@ -547,7 +546,7 @@ h2 {
     color: #222;
 }
 
-.popup .form .form-element input[type="text"]
+.popup .form .form-element input[type="text"], textarea
 {
     margin-top: 5px;
     display: block;
@@ -559,6 +558,74 @@ h2 {
 }
 
 
+
+.boton-aceptar {
+
+    appearance: button;
+    background-color: #4423c5;
+    border: solid transparent;
+    border-radius: 16px;
+    border-width: 0 0 4px;
+    box-sizing: border-box;
+    color: #ffffff;
+  
+    cursor: pointer;
+    display: inline-block;
+  
+    font-family: 'Brush Script MT', cursive;
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: .8px;
+    line-height: 20px;
+    margin: 0;
+    outline: none;
+    overflow: visible;
+    padding: 13px 8px;
+    text-align: center;
+    text-transform: uppercase;
+    touch-action: manipulation;
+    transform: translateZ(0);
+    transition: filter .2s;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 100%;
+}
+  
+.boton-aceptar > a {
+    text-decoration: none;
+    color: #fff;
+}
+  
+.boton-aceptar:after {
+  background-clip: padding-box;
+  background-color: #643eff;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+  
+.boton-aceptar:main,
+.boton-aceptar:focus {
+  user-select: auto;
+}
+
+.boton-aceptar:hover:not(:disabled) {
+  filter: brightness(1.1);
+  -webkit-filter: brightness(1.1);
+}
+
+.boton-aceptar:disabled {
+  cursor: auto;
+}
 
 .boton-aceptar {
 

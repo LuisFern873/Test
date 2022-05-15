@@ -128,20 +128,19 @@
 <div class="popup-form-task">
     <div class="popup">
         <div class="closebtn">&times;</div>
-        <!-- CAMBIAR ACTION!!!!!!!!!!!!!!!!!!!1 -->
-        <form class="form" id="form-task" action="/empleados/new_empleado" method="POST">
+        <form class="form" id="form-task" action="/empleados/asignar_tarea" method="POST">
             <h2>Ingrese los datos de la tarea</h2>
             <div class="form-element">
                 <label for="titulo">Título:</label>
-                <input type="text" id="titulo" placeholder="Título">
+                <input id="titulo" type="text" placeholder="Título">
             </div>
             <div class="form-element">
                 <label for="descripcion">Descripción:</label>
-                <textarea rows = "5" cols = "41" id = "descripcion"></textarea>
+                <textarea id = "descripcion" rows = "5" cols = "41" placeholder="Descripción"></textarea>
             </div>
             <div class="form-element">
                 <a>
-                    <button class="boton-aceptar" role="button" >Asignar</button>
+                    <button class="boton-asignar" role="button" >Asignar</button>
                 </a>
             </div>
     

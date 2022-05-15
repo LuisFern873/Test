@@ -124,7 +124,7 @@ for(let i = 0; i < botones_edit.length; i++)
 {
     const boton_edit = botones_edit[i];
     boton_edit.onclick = function(e){
-        dni_empleado = boton_edit.getAttribute('id'); // id del empleado
+        dni_empleado = boton_edit.getAttribute('id'); // dni del empleado
         console.log(dni_empleado);
     }
 }
@@ -178,3 +178,41 @@ document.getElementById('form-edit').onsubmit = function(prevent)
 
 // Código javascript para asignar tareas a los empleados
 
+const titulo_input = document.getElementById('titulo')
+const descripcion_input = document.getElementById('descripcion')
+
+const botones_asignar = document.querySelectorAll('.boton-tarea')
+var dni_empleado = 0
+
+for(let i = 0; i < botones_asignar.length; i++)
+{
+    const boton_asignar = botones_asignar[i];
+    boton_asignar.onclick = function(e){
+        dni_empleado = boton_asignar.getAttribute('id'); // dni del empleado
+        console.log(dni_empleado);
+    }
+}
+
+document.getElementById('form-task').onsubmit = function(prevent)
+{
+    prevent.preventDefault();
+    const titulo = titulo_input.value;
+    const descripcion = descripcion_input.value;
+
+    fetch('/empleados/asignar_tarea/' + dni_empleado,{
+        method: 'POST',
+        body: JSON.stringify({
+            'titulo': titulo,
+            'descripcion': descripcion
+        }),
+        headers: {'Content-Type': 'application/json'}})
+    .then(response => response.json())
+    .then(function(jsonResponse) 
+    {
+        console.log(jsonResponse);
+        
+    })
+    .catch(function(){
+        console.log("ERROR");
+    });
+}

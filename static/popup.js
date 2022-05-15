@@ -38,6 +38,12 @@ document.querySelector(".popup-form-task .popup .closebtn").addEventListener(
     } 
 );
 
+document.querySelector(".boton-asignar").addEventListener(
+    "click", function(){
+        document.querySelector(".popup-form-task").classList.remove("active");
+    } 
+);
+
 /* Tercer formulario - Editar */
 
 const edits = document.querySelectorAll('.boton-editar')
