@@ -471,6 +471,82 @@ h2 {
 }
 
 
+/* Boton asignar TAREA */
+.boton-asignar {
+
+  appearance: button;
+  background-color: #4423c5;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #ffffff;
+
+  cursor: pointer;
+  display: inline-block;
+
+  font-family: 'Brush Script MT', cursive;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: .8px;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 13px 8px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.boton-asignar > a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.boton-asignar:after {
+background-clip: padding-box;
+background-color: #643eff;
+border: solid transparent;
+border-radius: 16px;
+border-width: 0 0 4px;
+bottom: -4px;
+content: "";
+left: 0;
+position: absolute;
+right: 0;
+top: 0;
+z-index: -1;
+}
+
+.boton-asignar:main,
+.boton-asignar:focus {
+user-select: auto;
+}
+
+.boton-asignar:hover:not(:disabled) {
+filter: brightness(1.1);
+-webkit-filter: brightness(1.1);
+}
+
+.boton-asignar:disabled {
+cursor: auto;
+}
+
+
+
+
+
+
+
+
 /* FORM */
 
 .popup-form, .popup-form-task, .popup-form-edit

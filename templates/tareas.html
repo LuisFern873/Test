@@ -8,22 +8,26 @@
 {% block body %}
 
 <section class="textos-header">
-    <h2>Lista de tareas</h2>
+    <h2>Lista de tareas pendientes</h2>
 </section>
 
 <div class="container">
 
     {% for tarea in tareas %}
-    <div class="box">
-        <div class="details">
-            <h2>Tarea: {{tarea.titulo}}</h2> 
-            <p>Descripción: {{tarea.descripcion}}</p>
-        </div>
-        <input type="checkbox" name="">
-        <input type="submit" value="Eliminar">
-    </div>
+        {% if tarea.completo == false %}
+            <div class="box" id="{{tarea.id_tarea}}">
+                <div class="details">
+                    <h2>Tarea: {{tarea.titulo}}</h2> 
+                    <p>Descripción: {{tarea.descripcion}}</p>
+                    <p>{{tarea.empleado}}</p>
+                </div>
+                <input id="{{tarea.id_tarea}}" class="completo" type="checkbox" autocomplete="off"/>
+            </div>
+        {% endif %}
     {% endfor %}
 
 </div>
+
+<script src="static/tareas.js"></script>
 
 {% endblock body %}

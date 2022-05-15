@@ -49,10 +49,8 @@ class Tarea(db.Model):
     id_tarea = db.Column(db.Integer, primary_key = True)
     titulo = db.Column(db.String(50), nullable = True)
     descripcion = db.Column(db.String(500), nullable = True)
-    completo = db.Column(db.Boolean, default = False)
+    completo = db.Column(db.Boolean, nullable = False)
     asignado = db.Column(db.Integer, db.ForeignKey('empleado.dni_empleado'))
 
     def __repr__(self):
         return "Tarea: {}".format(self.id_tarea)
-
-db.create_all()

@@ -222,6 +222,17 @@ def asignar_tarea(dni):
 
     return jsonify({'titulo': titulo, 'descripcion': descripcion})
 
+@app.route('/tareas/update_tarea/<id>', methods = ['POST','GET'])
+def update_tarea(id):
+    # Tarea que va ser completada
+    tarea = Tarea.query.filter_by(id_tarea = id)
+    # Tarea marcada como completa
+    tarea.update({'completo': True})
+    db.session.commit()
+
+    return redirect(url_for('tareas'))
+
+
 if __name__ == "__main__":
     app.run(debug = True)
 
