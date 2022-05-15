@@ -1,5 +1,5 @@
-from ntpath import join
-from flask import render_template,request,abort,jsonify,redirect,url_for,make_response
+from flask import render_template,request,abort,jsonify,redirect,url_for
+from werkzeug.security import generate_password_hash, check_password_hash
 from models import *
 import sys
 
@@ -19,7 +19,6 @@ def login():
 
 @app.route('/login/log_admin', methods=["POST","GET"])
 def log_admin():
-    
     response = {}
 
     dni_admin = request.get_json()["dni_admin_login"]
@@ -27,7 +26,7 @@ def log_admin():
     
     admin = Administrador.query.filter_by(dni_admin = dni_admin).first()
 
-    if admin != None and admin.password == password:
+    if admin != None and check_password_hash(admin.password, password): 
         response["dni_admin"] = admin.dni_admin
         response["password"] = admin.password
 
@@ -40,10 +39,11 @@ def log_admin():
 def administradores():
     return render_template('administradores.html', users = Administrador.query.all())
 
-@app.route('/register/register_user', methods=["POST","GET"])
-def register_user():
+@app.route('/register/register_admin', methods=["POST","GET"])
+def register_admin():
     error = False
     response = {}
+
     try:
         dni_admin = request.get_json()["dni_admin"]
         nombres = request.get_json()["nombres"]
@@ -52,22 +52,24 @@ def register_user():
         password = request.get_json()["password"]
         confirm_password = request.get_json()["confirm_password"]
 
-        if password == confirm_password:
+        hashed = generate_password_hash(password)
+
+        if check_password_hash(hashed, confirm_password):
             admin = Administrador(
                 dni_admin = dni_admin,
                 nombres = nombres,
                 apellidos = apellidos,
                 correo = correo,
-                password = password)
+                password = hashed)
 
             db.session.add(admin)
             db.session.commit()
 
-            response['dni_admin'] = admin.dni_admin
+            response['mensaje'] = 'success'
             response['nombres'] = admin.nombres
-            response['apellidos'] = admin.apellidos
-            response['correo'] = admin.correo
-            response['password'] = admin.password
+
+        else:
+            response['mensaje'] = '¡Confirme correctamente su contraseña!'
 
     except Exception as exp:
         db.session.rollback()

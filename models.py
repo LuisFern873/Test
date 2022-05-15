@@ -27,14 +27,14 @@ class Administrador(db.Model):
     nombres = db.Column(db.String(100), nullable = False)
     apellidos = db.Column(db.String(100), nullable = False)
     correo = db.Column(db.String(100), unique = True, nullable = False)
-    password = db.Column(db.String(100), nullable = False)
+    password = db.Column(db.String(300), nullable = False)
     fecha_anadido = db.Column(db.DateTime(), default = datetime.now)
 
     def __repr__(self):
         return "Administrador: {}".format(self.dni_admin)
 
 class Empleado(db.Model):
-    dni_empleado = db.Column(db.Integer, primary_key = True)
+    dni_empleado = db.Column(db.String(8), primary_key = True)
     nombres = db.Column(db.String(50), nullable = False)
     apellidos = db.Column(db.String(50), nullable = False)
     genero = db.Column(db.String(1), nullable = False)
@@ -50,7 +50,9 @@ class Tarea(db.Model):
     titulo = db.Column(db.String(50), nullable = True)
     descripcion = db.Column(db.String(500), nullable = True)
     completo = db.Column(db.Boolean, nullable = False)
-    asignado = db.Column(db.Integer, db.ForeignKey('empleado.dni_empleado'))
+    asignado = db.Column(db.String(8), db.ForeignKey('empleado.dni_empleado'))
 
     def __repr__(self):
         return "Tarea: {}".format(self.id_tarea)
+
+db.create_all()
