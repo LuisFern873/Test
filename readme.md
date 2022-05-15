@@ -10,22 +10,25 @@
 | 201820010 | Jean Franco Aquino Rojas | [jean.aquino@utec.udu.pe](mailto:jean.aquino@utec.udu.pe) |
 ## Descripción:
 
-Hoy en día, muchas empresas están buscando herramientas que mejoren la productividad de su personal administrativo y empleados. En ese marco, que se requiere de software que organice sus recursos y se ajuste a sus necesidades. Es por ello que nace este proyecto que pretende solucionar estos problemas en aquellas organizaciones que buscan máxima eficiencia. Entre estas se encuentra la cadena de tiendas Tambo+, siendo nuestro proyecto a quien va dirigido.
+Hoy en día, muchas empresas están buscando herramientas que mejoren la productividad de su personal administrativo y empleados. Es por ello, que se requiere de software que organice sus recursos y se ajuste a sus necesidades. En ese marco, nace este proyecto que pretende solucionar estos problemas en aquellas organizaciones que buscan máxima eficiencia. Entre estas se encuentra la cadena de tiendas Tambo+, siendo nuestro proyecto a quien va dirigido.
+
+![](static/images/Tambo-logo.png)
 
 ## Objetivos principales / Misión / Visión:
 
-Misión
+### Misión
 
-- Ayudar a administradores de tiendas Tambo a asignar tareas en un espacio web.
+- Resolver problemas de gestión de empleados y asignación de tareas
+que posee la cadena de tiendas Tambo, por medio de una plataforma web.
 
-Visión
+### Visión
 
-- 
+- Convertirse en una plataforma reconocida por su escalabilidad y gran solvencia al aumentar la productividad del personal administrativo.
 
-El presente proyecto tiene como objetivos:
+### Objetivos
 
-- Ayudar a administradores de tiendas Tambo a asignar tareas en un espacio web.
 - Otorgar flexibilidad y eficiencia para organizar empleados.
+- Proveer un servicio personalizado y herramientas de gestión a administradores.
 
 ## Librerías / frameworks / plugins utilizados en el Front-end, Back-end y Base de datos:
 
@@ -40,15 +43,19 @@ Para el front-end se utilizaron las siguientes tecnologías:
 
 Para el back-end se utilizaron las siguientes tecnologías:
 
-- 
+- flask
 - SQLalchemy
 - flask_migrate
+- json
+- models
 
 ### Base de datos:
 
 - PostgreSQL (servidor alojado en la plataforma Heroku)
 
 ## Nombre del Script a ejecutar para iniciar la base de datos con datos:
+
+Dado que la base de datos y su respectivo servidor se encuentran alojadas en Heroku (programa en la nube) ni se requiere de un script para ser inicilializados.
 
 ## Información acerca de los API. Requests y Responses de cada endpoint utilizado en el sistema:
 

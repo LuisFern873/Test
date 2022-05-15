@@ -41,6 +41,7 @@ document.querySelector(".popup-form-task .popup .closebtn").addEventListener(
 document.querySelector(".boton-asignar").addEventListener(
     "click", function(){
         document.querySelector(".popup-form-task").classList.remove("active");
+        document.getElementById("success-tarea").className = "";
     } 
 );
 

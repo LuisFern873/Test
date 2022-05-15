@@ -772,12 +772,12 @@ cursor: auto;
 }
 
 /* Boton agregado exitosamente */
-.ad
+.ad, .success-tarea-alert
 {
     display: none;
 }
 
-#welcome
+#welcome, #success-tarea
 {
     padding: 5px;
     margin: 10px;
