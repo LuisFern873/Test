@@ -1,9 +1,15 @@
-from flask import render_template,request,abort,jsonify,redirect,url_for
+from flask import render_template, request, abort,jsonify, redirect,url_for
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import login_user, current_user, login_required, logout_user
 from models import *
-import sys
+
+app.config['SECRET_KEY'] = "12345"
 
 # Controllers
+
+@login_admin.user_loader
+def admin_loader(dni):
+    return Administrador.query.get(str(dni))
 
 @app.route('/')
 def home():
@@ -17,27 +23,33 @@ def register():
 def login():
     return render_template('login.html')
 
-@app.route('/login/log_admin', methods=["POST","GET"])
+@app.route('/login/log_admin', methods=["POST"])
 def log_admin():
     response = {}
+    error = False
 
     dni_admin = request.get_json()["dni_admin_login"]
     password = request.get_json()["password_login"]
-    
-    admin = Administrador.query.filter_by(dni_admin = dni_admin).first()
 
-    if admin != None and check_password_hash(admin.password, password): 
-        response["dni_admin"] = admin.dni_admin
-        response["password"] = admin.password
+    try:
+        admin = Administrador.query.filter_by(dni_admin = dni_admin).first()
+        
+        if admin is not None and check_password_hash(admin.password, password):
+            response['mensaje'] = 'success'
+            login_user(admin)
+        else:
+            response['mensaje'] = '¡Combinación DNI/contraseña inválida!'
 
-        return jsonify(response)
+    except Exception as exp:
+        error = True
+        response['mensaje'] = 'Exception is raised'
+        template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+        message = template.format(type(exp).__name__, exp.args)
+        print(message)
+    if error:
+        abort(500)
     else:
-        # Enviar un mensaje: ¡Combinación de DNI/contraseña inválida! 
-        return '¡Combinación de DNI/contraseña inválida!'
-
-@app.route('/administradores')
-def administradores():
-    return render_template('administradores.html', users = Administrador.query.all())
+        return jsonify(response)
 
 @app.route('/register/register_admin', methods=["POST","GET"])
 def register_admin():
@@ -74,8 +86,9 @@ def register_admin():
     except Exception as exp:
         db.session.rollback()
         error = True
-        print(exp)
-        print(sys.exc_info())
+        template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+        message = template.format(type(exp).__name__, exp.args)
+        print(message)
     finally:
         db.session.close()
 
@@ -86,10 +99,11 @@ def register_admin():
 
 # Endpoint donde se muestra la lista de empleados
 
-@app.route('/empleados', methods=["POST","GET"])
+@app.route('/empleados')
+@login_required
 def empleados():
     empleados = Empleado.query.order_by('fecha_anadido').all()
-    return render_template('empleados.html', empleados = empleados)
+    return render_template('empleados.html', empleados = empleados, name = current_user.nombres)
 
 # Endpoint para agregar a un empleado
 
@@ -120,8 +134,9 @@ def new_empleado():
     except Exception as exp:
         db.session.rollback()
         error = True
-        print(exp)
-        print(sys.exc_info())
+        template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+        message = template.format(type(exp).__name__, exp.args)
+        print(message)
     finally:
         db.session.close()
 
@@ -145,8 +160,9 @@ def delete_empleado(dni):
     except Exception as exp:
         db.session.rollback()
         error = True
-        print(exp)
-        print(sys.exc_info())
+        template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+        message = template.format(type(exp).__name__, exp.args)
+        print(message)
     finally:
         db.session.close()
 
@@ -185,8 +201,9 @@ def update_empleado(dni):
     except Exception as exp:
         db.session.rollback()
         error = True
-        print(exp)
-        print(sys.exc_info())
+        template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+        message = template.format(type(exp).__name__, exp.args)
+        print(message)
     finally:
         db.session.close()
 
@@ -195,11 +212,11 @@ def update_empleado(dni):
     else:
         return jsonify(response)
 
-@app.route('/tareas', methods = ['POST','GET'])
+@app.route('/tareas')
+@login_required
 def tareas():
     tareas = Tarea.query.all()
     return render_template("tareas.html", tareas = tareas)
-
 
 @app.route('/empleados/asignar_tarea/<dni>', methods = ['POST','GET'])
 def asignar_tarea(dni):
@@ -234,8 +251,15 @@ def update_tarea(id):
 
     return redirect(url_for('tareas'))
 
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
 if __name__ == "__main__":
+
+
     app.run(debug = True)
 
 

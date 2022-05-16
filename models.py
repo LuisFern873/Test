@@ -3,32 +3,29 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from datetime import datetime
 
-# from flask_login import (
-#     UserMixin, 
-#     login_user, 
-#     LoginManager, 
-#     login_required, 
-#     logout_user)
-
-# from flask_wtf import FlaskForm
-# from wtforms import StringField, PasswordField, SubmitField
-# from wtforms.validators import InputRequired, Length, ValidationError
+from flask_login import UserMixin, LoginManager
 
 app = Flask(__name__)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-URI = 'postgresql://ovfoduuadfenjt:6dd56e6cfa5db2ee89e46ee354ad19f976c4f22e77c14e912a6f27e15592ba24@ec2-3-224-164-189.compute-1.amazonaws.com:5432/d7n72srrj4b45g'
+login_admin = LoginManager()
+login_admin.init_app(app)
+
+URI = 'postgresql://ucyhwjueiddyap:d4b568b45f2d21b0d5439543ea3fe7d3560f75ec2799e780897de62bb3752379@ec2-3-224-164-189.compute-1.amazonaws.com:5432/d3kru7fbguascq'
 app.config['SQLALCHEMY_DATABASE_URI'] = URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-class Administrador(db.Model):
+class Administrador(db.Model, UserMixin):
     dni_admin = db.Column(db.String(8), primary_key = True)
     nombres = db.Column(db.String(100), nullable = False)
     apellidos = db.Column(db.String(100), nullable = False)
     correo = db.Column(db.String(100), unique = True, nullable = False)
     password = db.Column(db.String(300), nullable = False)
     fecha_anadido = db.Column(db.DateTime(), default = datetime.now)
+
+    def get_id(self):
+        return (self.dni_admin)
 
     def __repr__(self):
         return "Administrador: {}".format(self.dni_admin)

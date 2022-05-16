@@ -65,6 +65,38 @@ Para efectos de nuestro proyecto, utilizamos el localhost.
 
 ## Forma de autenticación:
 
+Para la autenticación de administradores se hizo uso del conocido módulo flask_login. Este permite que el acceso a los datos de empleados y tareas este restringido solo para los administradores que hayan iniciado sesión (logeados). A continuación, se presenta el código que realiza el proceso de autenticación mediante el formulario "login". En este se verifica que el dni ingresado pertenezca a un usuario registrado en la base de datos y que la contraseña ingresada coincida con la contraseña encriptada registrada como atributo de ese mismo usuario. Si esto se cumple, se procede a iniciar la sesión.
+
+```python
+@app.route('/login/log_admin', methods=["POST"])
+def log_admin():
+    response = {}
+    error = False
+
+    dni_admin = request.get_json()["dni_admin_login"]
+    password = request.get_json()["password_login"]
+
+    try:
+        admin = Administrador.query.filter_by(dni_admin = dni_admin).first()
+        
+        if admin is not None and check_password_hash(admin.password, password):
+            response['mensaje'] = 'success'
+            login_user(admin)
+        else:
+            response['mensaje'] = '¡Combinación DNI/contraseña inválida!'
+
+    except Exception as exp:
+        error = True
+        response['mensaje'] = 'Exception is raised'
+        template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+        message = template.format(type(exp).__name__, exp.args)
+        print(message)
+    if error:
+        abort(500)
+    else:
+        return jsonify(response)
+```
+
 ## Manejo de errores HTTP:
 - 500: Errores en el Servidor
 
