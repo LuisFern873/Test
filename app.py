@@ -1,3 +1,4 @@
+from http.client import ResponseNotReady
 from flask import render_template, request, abort,jsonify, redirect,url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, current_user, login_required, logout_user
@@ -32,24 +33,41 @@ def register_admin():
         password = request.get_json()["password"]
         confirm_password = request.get_json()["confirm_password"]
 
-        hashed = generate_password_hash(password)
+        if dni_admin.isspace() == True or len(dni_admin)==0:
+            response['mensaje_error'] = "Introduzca un dni valido"
 
-        if check_password_hash(hashed, confirm_password):
-            admin = Administrador(
-                dni_admin = dni_admin,
-                nombres = nombres,
-                apellidos = apellidos,
-                correo = correo,
-                password = hashed)
+        elif nombres.isspace() == True or len(nombres)==0:
+            response['mensaje_error'] = "Introduzca un nombre valido"
+        
+        elif apellidos.isspace() == True or len(apellidos)==0:
+            response['mensaje_error'] = "Introduzca un apellido valido valido"
 
-            db.session.add(admin)
-            db.session.commit()
+        elif correo.isspace() == True or len(correo)==0:
+            response['mensaje_error'] = "Introduzca un correo valido"
 
-            response['mensaje'] = 'success'
-            response['nombres'] = admin.nombres
+        elif password.isspace() == True or len(password)==0:
+            response['mensaje_error'] = "Introduzca una clave valida"                            
 
         else:
-            response['mensaje'] = '¡Confirme correctamente su contraseña!'
+
+            hashed = generate_password_hash(password)
+
+            if check_password_hash(hashed, confirm_password):
+                admin = Administrador(
+                    dni_admin = dni_admin,
+                    nombres = nombres,
+                    apellidos = apellidos,
+                    correo = correo,
+                    password = hashed)
+
+                db.session.add(admin)
+                db.session.commit()
+
+                response['mensaje'] = 'success'
+                response['nombres'] = admin.nombres
+
+            else:
+                response['mensaje'] = '¡Confirme correctamente su contraseña!'
 
     except Exception as exp:
         db.session.rollback()
@@ -117,19 +135,33 @@ def new_empleado():
         apellidos = request.get_json()["apellidos"]
         genero = request.get_json()["genero"]
 
-        empleado = Empleado(
-            dni_empleado = dni_empleado,
-            nombres = nombres,
-            apellidos = apellidos,
-            genero = genero)
+        if dni_empleado.isspace() == True or len(dni_empleado) == 0:
+            response['mensaje_error'] = 'El empleado debe tener un dni valido'
+        
+        elif nombres.isspace() == True or len(nombres) == 0:
+            response['mensaje_error'] = 'El empleado debe tener un nombre valido'
+    
+        elif apellidos.isspace() == True or len(apellidos) == 0:
+            response['mensaje_error'] = 'El empleado debe tener un apellido valido'
+        
+        elif genero.isspace() == True or len(genero) == 0:
+            response['mensaje_error'] = 'No se ha seleccionado un genero para el empleado'
+        
+        else:
+            empleado = Empleado(
+                dni_empleado = dni_empleado,
+                nombres = nombres,
+                apellidos = apellidos,
+                genero = genero)
 
-        db.session.add(empleado)
-        db.session.commit()
+            db.session.add(empleado)
+            db.session.commit()
 
-        response['dni_empleado'] = empleado.dni_empleado
-        response['nombres'] = empleado.nombres
-        response['apellidos'] = empleado.apellidos
-        response['genero'] = empleado.genero
+
+            response['dni_empleado'] = empleado.dni_empleado
+            response['nombres'] = empleado.nombres
+            response['apellidos'] = empleado.apellidos
+            response['genero'] = empleado.genero
 
     except Exception as exp:
         db.session.rollback()
