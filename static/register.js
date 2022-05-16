@@ -42,7 +42,7 @@ document.getElementById('form').onsubmit = function(prevent)
         }
     })
     .catch(function(){
-        console.log("Error")
+        console.log("Error");
         document.getElementById('error').className = "";
     });
 }

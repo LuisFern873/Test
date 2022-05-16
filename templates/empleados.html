@@ -16,10 +16,18 @@
     <h2>Lista de empleados</h2>
 </section>
 
+
+<div class="anadir">
+    <p style="color: white; font-size: 25px">¡Bienvenido! {{ name }}</p>
+</div>
+
 <div class="anadir">
     <button id="show-form" class="boton-anadir" role="button">Añadir empleado</button>
     <a href="{{url_for('tareas')}}">
         <button id="show-form" class="boton-anadir" role="button">Ver tareas</button>
+    </a>
+    <a href="{{url_for('logout')}}">
+        <button id="show-form" class="boton-anadir" role="button">Logout</button>
     </a>
 </div>
 
