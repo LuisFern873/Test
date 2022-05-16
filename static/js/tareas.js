@@ -10,7 +10,7 @@ for(let i = 0; i < botones_completo.length; i++)
         id = boton_completo.getAttribute('id'); // dni del empleado
         
         fetch('/tareas/update_tarea/' + id,{
-            method: 'POST'
+            method: 'PUT'
         })
         .then(function(){
             document.getElementById(id).style.display = 'none';

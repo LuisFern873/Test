@@ -4,9 +4,9 @@
 {% block head %}
 
     <!--ENLACES CSS-->
-    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'estilos.css') }}">
-    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'home.css') }}">
-    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'responsive.css') }}">
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'css/estilos.css') }}">
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'css/home.css') }}">
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'css/responsive.css') }}">
 
     <!--Box Icons-->
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
@@ -19,13 +19,13 @@
 
 <header class="header" id="inicio">
     <!--Transición-->
-    <img src="{{url_for('static',filename = 'images/wave.png')}}" alt="" class="wave">
+    <img src="{{url_for('static',filename = 'css/images/wave.png')}}" alt="" class="wave">
 
     <!--Textos e imágenes Header-->
     <div class="container">
         <section class="textos-header">
             <h1>Sistema de administración de empleados</h1>
-            <img src="{{url_for('static',filename = 'images/Tambo-logo.png')}}" alt="" class="logo">
+            <img src="{{url_for('static',filename = 'css/images/Tambo-logo.png')}}" alt="" class="logo">
             <h2>Cada vez más cerca</h2>
         </section>
     
@@ -41,7 +41,7 @@
     
 </header>
 
-<script src="static/register.js"></script>
+<script src="static/js/register.js"></script>
 
 {% endblock body %}
 

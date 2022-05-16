@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
 {% block head %}
-    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'empleados.css') }}">
-    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'estilos.css') }}">
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'css/empleados.css') }}">
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'css/estilos.css') }}">
     <!--Box Icons-->
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
     <!--Google fonts-->
@@ -36,9 +36,9 @@
     {% for empleado in empleados %}
         <div class="box" id="{{empleado.dni_empleado}}">
             {% if empleado.genero == 'M' %}
-                <img src="{{url_for('static',filename = 'images/empleado_hombre.png')}}" alt="">
+                <img src="{{url_for('static',filename = 'css/images/empleado_hombre.png')}}" alt="">
             {% else %}
-                <img src="{{url_for('static',filename = 'images/empleado_mujer.png')}}" alt="">
+                <img src="{{url_for('static',filename = 'css/images/empleado_mujer.png')}}" alt="">
             {% endif %}
 
             <div class="details">
@@ -164,7 +164,7 @@
 <div class="popup-form-edit">
     <div class="popup">
         <div class="closebtn">&times;</div>
-        <form class="form" id="form-edit" action="/empleados/update_empleado" method="POST">
+        <form class="form" id="form-edit" action="/empleados/update_empleado" method="put">
             <h2>¿Qué dato necesitas editar?</h2>
             <div class="form-element">
                 <li>DNI <input type="radio" name="gender" id="radio_dni" value='dni'></li>
@@ -199,10 +199,7 @@
 </div>
 
 
-
-
-
-<script src="static/popup.js"></script>
-<script src="static/empleados.js"></script>
+<script src="static/js/popup.js"></script>
+<script src="static/js/empleados.js"></script>
 
 {% endblock body %}

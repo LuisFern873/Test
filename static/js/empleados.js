@@ -137,7 +137,7 @@ document.getElementById('form-edit').onsubmit = function(prevent)
     var edit_apellidos = edit_apellidos_input.value;
 
     fetch('empleados/update_empleado/' + dni_empleado,{
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify({
             'edit_dni_empleado': edit_dni_empleado, 
             'edit_nombres': edit_nombres, 

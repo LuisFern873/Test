@@ -1,4 +1,4 @@
-## Nombre del proyecto: **Sistema de administración de empleados TAMBO**
+## Nombre del proyecto: **Sistema de administración de empleados y tareas TAMBO**
 
 ## Integrantes:
 
@@ -46,7 +46,7 @@ Para el back-end se utilizaron las siguientes tecnologías:
 - flask
 - SQLalchemy
 - flask_migrate
-- json
+- flask_login
 - models
 
 ### Base de datos:
@@ -55,9 +55,25 @@ Para el back-end se utilizaron las siguientes tecnologías:
 
 ## Nombre del Script a ejecutar para iniciar la base de datos con datos:
 
-Dado que la base de datos y su respectivo servidor se encuentran alojadas en Heroku (programa en la nube) ni se requiere de un script para ser inicilializados.
+Dado que la base de datos y su respectivo servidor se encuentran alojadas en Heroku (programa en la nube) no se requiere de un script para ser inicilializados.
 
 ## Información acerca de los API. Requests y Responses de cada endpoint utilizado en el sistema:
+
+| HTTP method | API endpoint                      | Description and response                                          |
+| ----------- | --------------------------------- | ----------------------------------------------------------- |
+|             | /                                 | Muestra la página de inicio (home)                          |
+|             | /register                         | Muestra el formulario de registro                           |
+| POST y GET  | /register/register\_admin         | Crea y registra a un administrador en la base de datos      |
+|             | /login                            | Muestra el formulario para iniciar sesión                   |
+| POST y GET  | /login/log\_admin                 | Autenticación e inicio de sesión de los administradores     |
+|             | /empleados                        | Muestra la lista de empleados                               |
+| POST y GET  | /empleados/new\_empleado          | Crea y registra a un empleado en la base de datos           |
+| DELETE      | /empleados/delete\_empleado/<dni> | Elimina a un empleado de la base de datos apartir de su dni |
+| PUT         | /empleados/update\_empleado/<dni> | Actualiza los datos de un empleado apartir de su dni        |
+|             | /tareas                           | Muestra la lista de tareas pendientes                       |
+| POST y GET  | /empleados/asignar\_tarea/<dni>   | Asigna una tarea a un empleado apartir de su dni            |
+| PUT         | /tareas/update\_tarea/<id>        | Actualiza el estado de la tarea a completo apartir de su id  |
+|             | /logout                           | Permite que los administradores cierren sesión              |
 
 ## Hosts:
 
@@ -118,3 +134,14 @@ Si el usuario no tiene acceso a un determinado endpoint se le notifica sobre est
 - 300: Redirección
 - 200: Exitoso
 - 100: Informacional
+
+
+## Cómo ejecutar el sistema (Deployment scripts):
+
+- Asegurarse de cumplir con todos los requisitos de intalación de paquetes, módulos y librerias que aparecen en el documento de texto requirements.txt
+
+- Ejecutar en la terminal el siguiente comando 
+
+```
+python app.py 
+```

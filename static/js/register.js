@@ -37,6 +37,8 @@ document.getElementById('form').onsubmit = function(prevent)
             nom.innerHTML = jsonResponse['nombres'];
             document.getElementById('name').appendChild(nom);
             document.getElementById('welcome').className = "";
+
+            window.location.href="/login";
         } else{
             document.getElementById('changepassword').className = "";
         }
