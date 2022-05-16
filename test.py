@@ -88,27 +88,65 @@ class Testeo(unittest.TestCase):
 
     def test_login_right(self):
         tester = app.test_client(self)
-        response = tester.post(
+        respuesta = tester.post(
             '/login/log_admin', 
-            data=json.dumps(dict(dni_admin='12345678', password='cinco')),
-            content_type='application/json',
+            datos = json.dumps(dict(dni_admin='12345678', password='cinco')),
+            content_type = 'application/json',
             follow_redirects=True)
-        self.assertIn(b'false', response.data)
+        self.assertIn(b'false', respuesta.datos)
 
     def test_login_wrong_DNI(self):
         tester = app.test_client(self)
-        response = tester.post(
+        respuesta = tester.post(
             '/login/log_admin', 
-            data=json.dumps(dict(dni_admin='', password='cinco')),
-            content_type='application/json',
+            datos = json.dumps(dict(dni_admin='', password='cinco')),
+            content_type = 'application/json',
             follow_redirects=True)
-        self.assertIn(b'DNI invalido', response.data)
+        self.assertIn(b'DNI invalido', respuesta.datos)
 
     def test_login_wrong_password(self):
         tester = app.test_client(self)
-        response = tester.post(
+        respuesta = tester.post(
             '/login/log_admin', 
-            data=json.dumps(dict(dni_admin='12345678', password='')),
-            content_type='application/json',
-            follow_redirects=True)
-        self.assertIn(b'Clave invalida', response.data)
+            datos = json.dumps(dict(dni_admin='12345678', password='')),
+            content_type = 'application/json',
+            follow_redirects = True)
+        self.assertIn(b'Clave invalida', respuesta.datos)
+
+    # Probando la creacion de empleados #
+
+    def test_newEmpleado_wrong_DNI(self):
+        tester = app.test_client(self)
+        respuesta = tester.post(
+            '/empleados/new_empleado',
+            datos = json.dumps(dict(dni_empleado = '', nombres='Sara', apellidos='Flores', genero='F')),
+            content_type = 'application/json',
+            follow_redirects = True)
+        self.assertIn(b'El empleado debe tener un dni valido', respuesta.datos)
+    
+    def test_newEmpleado_wrong_nombre(self):
+        tester = app.test_client(self)
+        respuesta = tester.post(
+            '/empleados/new_empleado',
+            datos = json.dumps(dict(dni_empleado = '85790502', nombres='', apellidos='Flores', genero='F')),
+            content_type = 'application/json',
+            follow_redirects = True)
+        self.assertIn(b'El empleado debe tener un nombre valido', respuesta.datos)
+
+    def test_newEmpleado_wrong_apellido(self):
+        tester = app.test_client(self)
+        respuesta = tester.post(
+            '/empleados/new_empleado',
+            datos = json.dumps(dict(dni_empleado = '85790502', nombres='Sara', apellidos='', genero='F')),
+            content_type = 'application/json',
+            follow_redirects = True)
+        self.assertIn(b'El(la) empleado(a) debe tener un apellido valido', respuesta.datos)
+
+    def test_newEmpleado_wrong_genero(self):
+        tester = app.test_client(self)
+        respuesta = tester.post(
+            '/empleados/new_empleado',
+            datos = json.dumps(dict(dni_empleado = '85790502', nombres='Sara', apellidos='Flores', genero='')),
+            content_type = 'application/json',
+            follow_redirects = True)
+        self.assertIn(b'El(la) empleado(a) debe tener un genero valido', respuesta.datos)
