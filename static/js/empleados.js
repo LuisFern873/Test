@@ -213,7 +213,8 @@ document.getElementById('form-task').onsubmit = function(prevent)
     .then(function(jsonResponse) 
     {
         console.log(jsonResponse);
-        
+        document.querySelector(".popup-form-task").classList.remove("active");
+        document.getElementById("success-tarea").className = "";
     })
     .catch(function(){
         console.log("ERROR");
