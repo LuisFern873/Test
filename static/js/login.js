@@ -11,6 +11,7 @@ document.getElementById('form-login').onsubmit = function(prevent){
     .then(response => response.json())
     .then(function(jsonResponse) {
         console.log(jsonResponse);
+        
 
         if(jsonResponse['mensaje'] == '¡Combinación DNI/contraseña inválida!'){
             document.getElementById('error').className = "";
@@ -18,6 +19,7 @@ document.getElementById('form-login').onsubmit = function(prevent){
         else{
             window.location.href="/empleados";
         }
+        
     })
     .catch(function() {
         console.log("Error");

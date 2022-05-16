@@ -52,9 +52,12 @@ document.getElementById('form-add').onsubmit = function(prevent)
         document.getElementById("new_apellidos").appendChild(ape);
         document.getElementById('new_genero').appendChild(gen);
 
-
+        // Aparece el aviso de añadido
         document.getElementById('welcome').className = "";
+        // Aparece la nueva ficha
         document.getElementById('new-box').id = "";
+        // Quitar el formulario
+        document.querySelector(".popup-form").classList.remove("active");
         
     })
     .catch(function(){
