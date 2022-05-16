@@ -11,12 +11,6 @@ document.querySelector(".popup-form .popup .closebtn").addEventListener(
     } 
 );
 
-document.querySelector(".boton-aceptar").addEventListener(
-    "click", function(){
-        document.querySelector(".popup-form").classList.remove("active");
-    } 
-);
-
 
 /* Segundo formulario - Asignar tarea */
 
