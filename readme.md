@@ -12,7 +12,7 @@
 
 Hoy en día, muchas empresas están buscando herramientas que mejoren la productividad de su personal administrativo y empleados. Es por ello, que se requiere de software que organice sus recursos y se ajuste a sus necesidades. En ese marco, nace este proyecto que pretende solucionar estos problemas en aquellas organizaciones que buscan máxima eficiencia. Entre estas se encuentra la cadena de tiendas Tambo+, siendo nuestro proyecto a quien va dirigido.
 
-![](static/images/Tambo-logo.png)
+![](static/css/images/Tambo-logo.png)
 
 ## Objetivos principales / Misión / Visión:
 
@@ -68,11 +68,11 @@ Dado que la base de datos y su respectivo servidor se encuentran alojadas en Her
 | POST y GET  | /login/log\_admin                 | Autenticación e inicio de sesión de los administradores     |
 |             | /empleados                        | Muestra la lista de empleados                               |
 | POST y GET  | /empleados/new\_empleado          | Crea y registra a un empleado en la base de datos           |
-| DELETE      | /empleados/delete\_empleado/<dni> | Elimina a un empleado de la base de datos apartir de su dni |
-| PUT         | /empleados/update\_empleado/<dni> | Actualiza los datos de un empleado apartir de su dni        |
+| DELETE      | /empleados/delete\_empleado/< dni > | Elimina a un empleado de la base de datos apartir de su dni |
+| PUT         | /empleados/update\_empleado/< dni > | Actualiza los datos de un empleado apartir de su dni        |
 |             | /tareas                           | Muestra la lista de tareas pendientes                       |
-| POST y GET  | /empleados/asignar\_tarea/<dni>   | Asigna una tarea a un empleado apartir de su dni            |
-| PUT         | /tareas/update\_tarea/<id>        | Actualiza el estado de la tarea a completo apartir de su id  |
+| POST y GET  | /empleados/asignar\_tarea/< dni >   | Asigna una tarea a un empleado apartir de su dni            |
+| PUT         | /tareas/update\_tarea/< id >        | Actualiza el estado de la tarea a completo apartir de su id  |
 |             | /logout                           | Permite que los administradores cierren sesión              |
 
 ## Hosts:
@@ -114,26 +114,50 @@ def log_admin():
 ```
 
 ## Manejo de errores HTTP:
+
+Dentro de la aplicación,aparecen distintas alertas a fin de notificar al usuario si ha ocurrido un error. A continuación, se listan algunas situaciones en las que podría ocurrir:
+
 - 500: Errores en el Servidor
 
-Si los datos introducidos por el usuario en el formulario de registro no cumplen con el esquema o restricciones de la base de datos, se levanta una excepción y los datos no se persisten, arrojando un abort(500):
+    - En el formulario de registro de administradores:
 
-```python
-if error:
-    abort(500)
-else:
-    return jsonify(response)
-```
+        - Si el usuario no ha introducido ningún dato o aún hay campos sin rellenar.
+        (Alerta: Please fill out this field.)
+        - Si el dni introducido coincide con el dni de otro usuario ya registrado o existente en la base de datos. 
+        (Alerta: ¡Algo salió mal! Vuelve a intentarlo.)
+        - Si los datos no cumplen con el esquema o restricciones de la base de datos. (Alerta: ¡Algo salió mal! Vuelve a intentarlo.)
+        - Si la contraseña y la confirmación de la contraseña no coinciden.
+        (Alerta: ¡Confirme correctamente su contraseña!)
 
-Para manejar este error en el servidor, el usuario es notificado con un mensaje invitandolo a realizar modificaciones en sus datos.
+        En todos los casos, los datos introducidos no se persisten y se le invita al usuario a realizar modificaciones en sus datos.
+
+    - En el formulario de login de administradores:
+
+        - Si no existe un usuario con el dni introducido o exista, pero la contraseña no es correcta. (Alerta: ¡Combinación DNI/contraseña inválida!)
+
+        En este caso, no se procede a iniciar sesión.
+
+    - En la lista de empleados:
+        - Si se elimina a empleado recién añadido. (Alerta: ¡No puede eliminar a un empleado recién añadido!)
+        
+    - En otras situaciones no contempladas se procura levantar una excepción, arrojando un abort(500):
+
+    ```python
+    if error:
+        abort(500)
+    else:
+        return jsonify(response)
+    ```
 
 - 400: Errores en el Clientes
 
-Si el usuario no tiene acceso a un determinado endpoint se le notifica sobre esta restricción.
+    - Si el usuario (administrador) quiere acceder a la lista de empleados y tareas sin realizar el loguin
+    le aparecerá un error de tipo "Error 401 Unauthorized". Se requiere iniciar sesión para tener acceso a estos recursos.
 
-- 300: Redirección
-- 200: Exitoso
-- 100: Informacional
+- 300, 200 y 100: Redirección, Exitoso e Informacional
+    
+    Otras alertas que podrían aparecer tienen la función de notificarle al usuario que su solicitud (por ejemplo, añadir empleado, eliminar empleado, asignar tarea, actualizar empleado, etc.) se ha ejecutado exitosamente.
+
 
 
 ## Cómo ejecutar el sistema (Deployment scripts):
