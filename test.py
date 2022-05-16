@@ -140,7 +140,7 @@ class Testeo(unittest.TestCase):
             datos = json.dumps(dict(dni_empleado = '85790502', nombres='Sara', apellidos='', genero='F')),
             content_type = 'application/json',
             follow_redirects = True)
-        self.assertIn(b'El(la) empleado(a) debe tener un apellido valido', respuesta.datos)
+        self.assertIn(b'El empleado debe tener un apellido valido', respuesta.datos)
 
     def test_newEmpleado_wrong_genero(self):
         tester = app.test_client(self)
@@ -149,4 +149,4 @@ class Testeo(unittest.TestCase):
             datos = json.dumps(dict(dni_empleado = '85790502', nombres='Sara', apellidos='Flores', genero='')),
             content_type = 'application/json',
             follow_redirects = True)
-        self.assertIn(b'El(la) empleado(a) debe tener un genero valido', respuesta.datos)
+        self.assertIn(b'El empleado debe tener un genero valido', respuesta.datos)
