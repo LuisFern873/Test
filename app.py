@@ -15,41 +15,11 @@ def admin_loader(dni):
 def home():
     return render_template('home.html')
 
+# Registro del administrador
+
 @app.route('/register', methods=["POST","GET"])
 def register():
     return render_template('register.html')
-
-@app.route('/login', methods=["POST","GET"])
-def login():
-    return render_template('login.html')
-
-@app.route('/login/log_admin', methods=["POST"])
-def log_admin():
-    response = {}
-    error = False
-
-    dni_admin = request.get_json()["dni_admin_login"]
-    password = request.get_json()["password_login"]
-
-    try:
-        admin = Administrador.query.filter_by(dni_admin = dni_admin).first()
-        
-        if admin is not None and check_password_hash(admin.password, password):
-            response['mensaje'] = 'success'
-            login_user(admin)
-        else:
-            response['mensaje'] = '¡Combinación DNI/contraseña inválida!'
-
-    except Exception as exp:
-        error = True
-        response['mensaje'] = 'Exception is raised'
-        template = "An exception of type {0} occurred. Arguments:\n{1!r}"
-        message = template.format(type(exp).__name__, exp.args)
-        print(message)
-    if error:
-        abort(500)
-    else:
-        return jsonify(response)
 
 @app.route('/register/register_admin', methods=["POST","GET"])
 def register_admin():
@@ -92,6 +62,40 @@ def register_admin():
     finally:
         db.session.close()
 
+    if error:
+        abort(500)
+    else:
+        return jsonify(response)
+
+# Login para administradores
+
+@app.route('/login', methods=["POST","GET"])
+def login():
+    return render_template('login.html')
+
+@app.route('/login/log_admin', methods=["POST"])
+def log_admin():
+    response = {}
+    error = False
+
+    dni_admin = request.get_json()["dni_admin_login"]
+    password = request.get_json()["password_login"]
+
+    try:
+        admin = Administrador.query.filter_by(dni_admin = dni_admin).first()
+        
+        if admin is not None and check_password_hash(admin.password, password):
+            response['mensaje'] = 'success'
+            login_user(admin)
+        else:
+            response['mensaje'] = '¡Combinación DNI/contraseña inválida!'
+
+    except Exception as exp:
+        error = True
+        response['mensaje'] = 'Exception is raised'
+        template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+        message = template.format(type(exp).__name__, exp.args)
+        print(message)
     if error:
         abort(500)
     else:
@@ -258,13 +262,4 @@ def logout():
     return redirect(url_for('login'))
 
 if __name__ == "__main__":
-
-
     app.run(debug = True)
-
-
-        
-
-
-
-

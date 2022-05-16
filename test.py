@@ -95,7 +95,7 @@ class Testeo(unittest.TestCase):
             follow_redirects=True)
         self.assertIn(b'false', response.data)
 
-    def test_logIn_wrong_DNI(self):
+    def test_login_wrong_DNI(self):
         tester = app.test_client(self)
         response = tester.post(
             '/login/log_admin', 
@@ -104,7 +104,7 @@ class Testeo(unittest.TestCase):
             follow_redirects=True)
         self.assertIn(b'DNI invalido', response.data)
 
-    def test_logIn_wrong_password(self):
+    def test_login_wrong_password(self):
         tester = app.test_client(self)
         response = tester.post(
             '/login/log_admin', 
