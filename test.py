@@ -15,9 +15,6 @@ class Testeo(unittest.TestCase):
         app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://ucyhwjueiddyap:d4b568b45f2d21b0d5439543ea3fe7d3560f75ec2799e780897de62bb3752379@ec2-3-224-164-189.compute-1.amazonaws.com:5432/d3kru7fbguascq'
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-        db.drop_all()
-        db.create_all()
-
     # Ejecutar despues de cada test #
     def tearDown(self):
         pass      
@@ -85,15 +82,6 @@ class Testeo(unittest.TestCase):
             follow_redirects=True)
         self.assertNotIn(b'success', respuesta.data)
     
-    def test_1g_register_right(self):
-        tester = app.test_client(self)
-        respuesta = tester.post(
-            '/register/register_admin',
-            data = json.dumps(dict(dni_admin='63578380', nombres='Alfonso', apellidos='Perez', correo='alfon.perez@gmail.com', password='12345', confirm_password='12345')),
-            content_type = 'application/json',
-            follow_redirects=True)
-        self.assertIn(b'success', respuesta.data)        
-
     # Probando el login de la aplicacion #
 
     def test_2a_login_right(self):
@@ -160,15 +148,6 @@ class Testeo(unittest.TestCase):
             content_type = 'application/json',
             follow_redirects = True)
         self.assertIn(b'No se ha seleccionado un genero para el empleado', respuesta.data)
-
-    def test_3e_newEmpleado_right(self):
-        tester = app.test_client(self)
-        respuesta = tester.post(
-            '/empleados/new_empleado',
-            data = json.dumps(dict(dni_empleado = '85790502', nombres='Sara', apellidos='Flores', genero='F')),
-            content_type = 'application/json',
-            follow_redirects = True)
-        self.assertIn(b'success', respuesta.data)    
 
 if __name__ == "__main__":
     unittest.main()
