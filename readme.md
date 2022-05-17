@@ -47,7 +47,8 @@ Para el back-end se utilizaron las siguientes tecnologías:
 - SQLalchemy
 - flask_migrate
 - flask_login
-- models
+- Jinja2
+- werkzeug.security (encriptación de contraseñas)
 
 ### Base de datos:
 
