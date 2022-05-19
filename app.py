@@ -157,7 +157,7 @@ def new_empleado():
             db.session.add(empleado)
             db.session.commit()
 
-
+            response['mensaje'] = 'success'
             response['dni_empleado'] = empleado.dni_empleado
             response['nombres'] = empleado.nombres
             response['apellidos'] = empleado.apellidos
@@ -188,6 +188,7 @@ def delete_empleado(dni):
         Empleado.query.filter_by(dni_empleado = dni).delete()
 
         db.session.commit()
+        response['mensaje'] = 'success'
         response['dni_empleado'] = dni
 
     except Exception as exp:
@@ -229,6 +230,7 @@ def update_empleado(dni):
         
         db.session.commit()
 
+        response['mensaje'] = 'success'
         response['dni_empleado'] = dni
 
     except Exception as exp:
