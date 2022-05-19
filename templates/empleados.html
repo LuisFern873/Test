@@ -47,6 +47,7 @@
                 <li id="edit-nombres-{{empleado.dni_empleado}}">Nombres: {{empleado.nombres}}</li>
                 <li id="edit-apellidos-{{empleado.dni_empleado}}">Apellidos: {{empleado.apellidos}}</li>
                 <li>Género: {{empleado.genero}}</li>
+                <li>Admin: {{empleado.admin}}</li>
             </div>
             <div class="botones">
                 <button id="{{empleado.dni_empleado}}" class="boton-tarea" role="button" >Asignar Tarea</button>
@@ -70,6 +71,7 @@
             <li id="new_nombres">Nombres: </li>
             <li id="new_apellidos">Apellidos: </li>
             <li id="new_genero">Género: </li>
+            <li id="new_admin">Admin: Usted </li>
         </div>
         <div class="botones">
             <button class="boton-tarea" role="button" >Asignar Tarea</button>
@@ -113,7 +115,7 @@
             <h2>Ingrese los datos del empleado</h2>
             <div class="form-element">
                 <label for="dni">Dni:</label>
-                <input type="text" id="dni_empleado" placeholder="Dni" required>
+                <input type="text" id="dni_empleado" placeholder="Dni" maxlength="8" required>
             </div>
             <div class="form-element">
                 <label for="nombres">Nombres:</label>

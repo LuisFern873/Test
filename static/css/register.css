@@ -33,7 +33,7 @@ body
     background-color: #ffffff;
     
     padding: 25px 30px;
-    border-radius: 5px;
+    border-radius: 5%;
 }
 
 .container .title
@@ -99,6 +99,9 @@ form .user_details .input_box
     border-color: #9b59b6;
 }
 
+
+/* Boton registrarse */
+
 form .button
 {
     height: 45px;
@@ -117,7 +120,8 @@ form .button input
 
     font-size: 18px;
     font-weight: 500;
-    border-radius: 5px;
+    border-radius: 10px;
+    
     letter-spacing: 1px;
 
     background: linear-gradient(135deg,#71b7e6,#9b59b6);

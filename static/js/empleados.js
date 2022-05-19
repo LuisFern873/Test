@@ -7,10 +7,10 @@ const nombres_input = document.getElementById('nombres')
 const apellidos_input = document.getElementById('apellidos')
 var genero_input = document.getElementById('male')
 
-document.getElementById('form-add').onsubmit = function(prevent)
+document.getElementById('form-add').onsubmit = function(event)
 {
-    prevent.preventDefault();
-    if(document.getElementById('female').checked === true) {
+    event.preventDefault();
+    if(document.getElementById('female').checked) {
         genero_input = document.getElementById('female');
         document.getElementById('mujer').id = "";
     }
@@ -54,14 +54,20 @@ document.getElementById('form-add').onsubmit = function(prevent)
 
         // Aparece el aviso de añadido
         document.getElementById('welcome').className = "";
-        // Aparece la nueva ficha
+        // Aparece la nueva ficha de información del empleado
         document.getElementById('new-box').id = "";
-        // Quitar el formulario
+        // Quita el formulario
         document.querySelector(".popup-form").classList.remove("active");
-        
+
+        // Limpiamos el formulario
+        dni_empleado_input.value = '';
+        nombres_input.value = '';
+        apellidos_input.value = '';
+        document.getElementById("male").checked = false;
+        document.getElementById("female").checked = false;
     })
     .catch(function(){
-        console.log("ERROR");
+        console.log("Error");
     });
 }
 
@@ -100,6 +106,11 @@ document.getElementById('radio_dni').onclick = function()
     document.getElementById('popup-form-edit-nombres').style.display = 'none';
     document.getElementById('popup-form-edit-apellidos').style.display = 'none';
 
+    // Dentro del formulario Editar, dado que el campo de dni se ha desplegado, este dato es obligatorio
+    document.getElementById("nuevo_dni").required = true;
+    document.getElementById("nuevos_nombres").required = false;
+    document.getElementById("nuevos_apellidos").required = false;
+
 }
 
 document.getElementById('radio_nombres').onclick = function()
@@ -107,6 +118,11 @@ document.getElementById('radio_nombres').onclick = function()
     document.getElementById('popup-form-edit-dni').style.display = 'none';
     document.getElementById('popup-form-edit-nombres').style.display = 'block';
     document.getElementById('popup-form-edit-apellidos').style.display = 'none';
+
+    document.getElementById("nuevo_dni").required = false;
+    document.getElementById("nuevos_nombres").required = true;
+    document.getElementById("nuevos_apellidos").required = false;
+
 }
 
 document.getElementById('radio_apellidos').onclick = function()
@@ -114,6 +130,10 @@ document.getElementById('radio_apellidos').onclick = function()
     document.getElementById('popup-form-edit-dni').style.display = 'none';
     document.getElementById('popup-form-edit-nombres').style.display = 'none';
     document.getElementById('popup-form-edit-apellidos').style.display = 'block';
+
+    document.getElementById("nuevo_dni").required = false;
+    document.getElementById("nuevos_nombres").required = false;
+    document.getElementById("nuevos_apellidos").required = true;
 }
 
 const edit_dni_empleado_input = document.getElementById('nuevo_dni')
@@ -132,9 +152,9 @@ for(let i = 0; i < botones_edit.length; i++)
     }
 }
 
-document.getElementById('form-edit').onsubmit = function(prevent)
+document.getElementById('form-edit').onsubmit = function(event)
 {
-    prevent.preventDefault();
+    event.preventDefault();
     var edit_dni_empleado = edit_dni_empleado_input.value;
     var edit_nombres = edit_nombres_input.value;
     var edit_apellidos = edit_apellidos_input.value;
@@ -171,8 +191,10 @@ document.getElementById('form-edit').onsubmit = function(prevent)
                 tag.innerHTML = "Apellidos: ";
                 document.getElementById("edit-apellidos-" + dni_empleado).appendChild(ape);
             }
-
+            // Aparece aviso de editado exitosamente
             document.getElementById('success-edit').className = "";
+            // Desaparecer el form
+            document.querySelector(".popup-form-edit").classList.remove("active");
 
         }).catch(function(){
             console.log("Error");

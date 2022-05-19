@@ -53,10 +53,3 @@ document.querySelector(".popup-form-edit .popup .closebtn").addEventListener(
     } 
 );
 
-document.querySelector(".boton-editar-dato").addEventListener(
-    "click", function(){
-        document.querySelector(".popup-form-edit").classList.remove("active");
-    } 
-);
- 
-
