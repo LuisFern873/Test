@@ -211,10 +211,28 @@ class Testeo(unittest.TestCase):
         tester = app.test_client(self)
         respuesta = tester.post(
             '/empleados/asignar_tarea/77777777' ,
-            data = json.dumps(dict(titulo = '', descripcion = 'Hidratarse es bueno')),
+            data = json.dumps(dict(titulo = "", descripcion = 'Hidratarse es bueno')),
             content_type = 'application/json',
             follow_redirects = True)
         self.assertIn(b'Ingrese un titulo valido' , respuesta.data)
+    
+    def test_5b_asignarTarea_wrong_description(self):
+        tester = app.test_client(self)
+        respuesta = tester.post(
+            '/empleados/asignar_tarea/77777777' ,
+            data = json.dumps(dict(titulo = 'Beber agua', descripcion = "")),
+            content_type = 'application/json',
+            follow_redirects = True)
+        self.assertIn(b'Ingrese una descripcion valida' , respuesta.data)
+    
+    def test_5c_asignarTarea_right(self):
+        tester = app.test_client(self)
+        respuesta = tester.post(
+            '/empleados/asignar_tarea/77777777' ,
+            data = json.dumps(dict(titulo = 'Beber agua', descripcion = 'Hidratarse es bueno')),
+            content_type = 'application/json',
+            follow_redirects = True)
+        self.assertNotIn(b'Ingrese un titulo valido' , respuesta.data)
 
 if __name__ == "__main__":
     unittest.main()

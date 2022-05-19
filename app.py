@@ -271,10 +271,10 @@ def asignar_tarea(dni):
     titulo = request.get_json()["titulo"]
     descripcion = request.get_json()["descripcion"]
 
-    if titulo != "":
+    if titulo == "":
         response['mensaje_error'] = 'Ingrese un titulo valido'
         return response
-    elif descripcion != "":
+    elif descripcion == "":
         response['mensaje_error'] = 'Ingrese una descripcion valida'
         return response
     else:
