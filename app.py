@@ -275,7 +275,7 @@ def asignar_tarea(dni):
         response['mensaje_error'] = 'Ingrese un titulo valido'
         return response
     elif descripcion != "":
-        response['mensaje_error'] = 'Ingrese un titulo valido'
+        response['mensaje_error'] = 'Ingrese una descripcion valida'
         return response
     else:
         # Empleado al que le vamos a asignar la tarea
