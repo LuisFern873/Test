@@ -1,4 +1,6 @@
 from http.client import ResponseNotReady
+from tkinter.messagebox import RETRY
+from urllib import response
 from flask import render_template, request, abort,jsonify, redirect,url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, current_user, login_required, logout_user
@@ -263,25 +265,34 @@ def tareas():
 @app.route('/empleados/asignar_tarea/<dni>', methods = ['POST','GET'])
 def asignar_tarea(dni):
 
+    response = {}
+
     # Recuperar datos de la tarea
     titulo = request.get_json()["titulo"]
     descripcion = request.get_json()["descripcion"]
 
-    # Empleado al que le vamos a asignar la tarea
-    empleado = Empleado.query.filter_by(dni_empleado = dni).first()
+    if titulo != "":
+        response['mensaje_error'] = 'Ingrese un titulo valido'
+        return response
+    elif descripcion != "":
+        response['mensaje_error'] = 'Ingrese un titulo valido'
+        return response
+    else:
+        # Empleado al que le vamos a asignar la tarea
+        empleado = Empleado.query.filter_by(dni_empleado = dni).first()
 
-    # Creamos la tarea
-    tarea = Tarea(
-        titulo = titulo,
-        descripcion = descripcion,
-        completo = False,
-        empleado = empleado
-    )
-    # Añadimos la tarea
-    db.session.add(tarea)
-    db.session.commit()
+        # Creamos la tarea
+        tarea = Tarea(
+            titulo = titulo,
+            descripcion = descripcion,
+            completo = False,
+            empleado = empleado
+        )
+        # Añadimos la tarea
+        db.session.add(tarea)
+        db.session.commit()
 
-    return jsonify({'titulo': titulo, 'descripcion': descripcion})
+        return jsonify({'titulo': titulo, 'descripcion': descripcion})
 
 @app.route('/tareas/update_tarea/<id>', methods = ['PUT'])
 def update_tarea(id):
