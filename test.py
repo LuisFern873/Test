@@ -178,7 +178,32 @@ class Testeo(unittest.TestCase):
             follow_redirects = True)
         self.assertIn(b'Ingrese un dni valido', respuesta.data)
 
+    def test_4b_UpdateEmpleado_wrong_nombres(self):
+        tester = app.test_client(self)
+        respuesta = tester.put(
+            '/empleados/update_empleado/85790502',
+            data = json.dumps(dict(edit_dni_empleado = "77777777", edit_nombres='', edit_apellidos='Grau')),
+            content_type = 'application/json',
+            follow_redirects = True)
+        self.assertIn(b'Ingrese un nombre valido' , respuesta.data)
 
+    def test_4c_UpdateEmpleado_wrong_apellidos(self):
+        tester = app.test_client(self)
+        respuesta = tester.put(
+            '/empleados/update_empleado/85790502',
+            data = json.dumps(dict(edit_dni_empleado = "77777777", edit_nombres='Alonso', edit_apellidos='')),
+            content_type = 'application/json',
+            follow_redirects = True)
+        self.assertIn(b'Ingrese un apellido valido' , respuesta.data)
+
+    def test_4d_UpdateEmpleado_right(self):
+        tester = app.test_client(self)
+        respuesta = tester.put(
+            '/empleados/update_empleado/85790502',
+            data = json.dumps(dict(edit_dni_empleado = "77777777", edit_nombres='Alonso', edit_apellidos='Grau')),
+            content_type = 'application/json',
+            follow_redirects = True)
+        self.assertNotIn(b'Ingrese un apellido valido' , respuesta.data)
 
 if __name__ == "__main__":
     unittest.main()
