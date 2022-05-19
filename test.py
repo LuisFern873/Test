@@ -12,7 +12,7 @@ class Testeo(unittest.TestCase):
         app.config['TESTING'] = True
         app.config['WTF_CSRF_ENABLED'] = False
         app.config['DEBUG'] = False
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://ucyhwjueiddyap:d4b568b45f2d21b0d5439543ea3fe7d3560f75ec2799e780897de62bb3752379@ec2-3-224-164-189.compute-1.amazonaws.com:5432/d3kru7fbguascq'
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:1234@localhost:5432/test_proyecto_dbp'
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # Ejecutar despues de cada test #
@@ -82,34 +82,43 @@ class Testeo(unittest.TestCase):
             follow_redirects=True)
         self.assertNotIn(b'success', respuesta.data)
     
+    def test_1f_register_right(self):
+        tester = app.test_client(self)
+        respuesta = tester.post(
+            '/register/register_admin',
+            data = json.dumps(dict(dni_admin='63578380', nombres='Alfonso', apellidos='Perez', correo='alfon.perez@gmail.com', password='12345', confirm_password='12345')),
+            content_type = 'application/json',
+            follow_redirects=True)
+        self.assertIn(b'success', respuesta.data)    
+    
     # Probando el login de la aplicacion #
 
-    def test_2a_login_right(self):
+    def test_2a_login_wrong_DNI(self):
         tester = app.test_client(self)
         respuesta = tester.post(
             '/login/log_admin', 
-            data = json.dumps(dict(dni_admin='63578380', password='12345')),
+            data = json.dumps(dict(dni_admin_login='', password_login='12345')),
             content_type = 'application/json',
             follow_redirects=True)
-        self.assertIn(b'false', respuesta.data)
+        self.assertNotIn(b'success', respuesta.data)
 
-    def test_2b_login_wrong_DNI(self):
+    def test_2b_login_wrong_password(self):
         tester = app.test_client(self)
         respuesta = tester.post(
             '/login/log_admin', 
-            data = json.dumps(dict(dni_admin='', password='cinco')),
-            content_type = 'application/json',
-            follow_redirects=True)
-        self.assertIn(b'DNI invalido', respuesta.data)
-
-    def test_2c_login_wrong_password(self):
-        tester = app.test_client(self)
-        respuesta = tester.post(
-            '/login/log_admin', 
-            data = json.dumps(dict(dni_admin='12345678', password='')),
+            data = json.dumps(dict(dni_admin_login='63578380', password_login='')),
             content_type = 'application/json',
             follow_redirects = True)
-        self.assertIn(b'Clave invalida', respuesta.data)
+        self.assertNotIn(b'success', respuesta.data)
+
+    def test_2c_login_right(self):
+        tester = app.test_client(self)
+        respuesta = tester.post(
+            '/login/log_admin', 
+            data = json.dumps(dict(dni_admin_login='63578380', password_login='12345')),
+            content_type = 'application/json',
+            follow_redirects=True)
+        self.assertIn(b'success', respuesta.data)
 
     # Probando la creacion de empleados #
 
@@ -148,6 +157,15 @@ class Testeo(unittest.TestCase):
             content_type = 'application/json',
             follow_redirects = True)
         self.assertIn(b'No se ha seleccionado un genero para el empleado', respuesta.data)
+
+    def test_3e_newEmpleado_right(self):
+        tester = app.test_client(self)
+        respuesta = tester.post(
+            '/empleados/new_empleado',
+            data = json.dumps(dict(dni_empleado = '85790502', nombres='Sara', apellidos='Flores', genero='F')),
+            content_type = 'application/json',
+            follow_redirects = True)
+        self.assertIn(b'success', respuesta.data)
 
 if __name__ == "__main__":
     unittest.main()
