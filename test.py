@@ -205,7 +205,7 @@ class Testeo(unittest.TestCase):
             follow_redirects = True)
         self.assertNotIn(b'Ingrese un apellido valido' , respuesta.data)
 
-    # Probando la creacion y actualizacion de tareas
+    # Probando la creacion de tareas
 
     def test_5a_asignarTarea_wrong_titulo(self):
         tester = app.test_client(self)
@@ -233,6 +233,16 @@ class Testeo(unittest.TestCase):
             content_type = 'application/json',
             follow_redirects = True)
         self.assertNotIn(b'Ingrese un titulo valido' , respuesta.data)
+    
+    # Probando la elminiacion de empleados
 
+    def test_6a_deleteEmpleado_right(self):
+        tester = app.test_client(self)
+        respuesta = tester.delete(
+            '/empleados/delete_empleado/77777777',
+            content_type = 'application/json',
+            follow_redirects = True)
+        self.assertIn(b'success' , respuesta.data)
+        
 if __name__ == "__main__":
     unittest.main()
