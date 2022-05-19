@@ -6,8 +6,7 @@ from app import app, db
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:1234@localhost:5432/test_proyecto_dbp'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['TESTING'] = True
-app.config['WTF_CSRF_ENABLED'] = False
-app.config['DEBUG'] = False
+
 
 
 db.drop_all()
@@ -243,6 +242,6 @@ class Testeo(unittest.TestCase):
             content_type = 'application/json',
             follow_redirects = True)
         self.assertIn(b'success' , respuesta.data)
-        
+
 if __name__ == "__main__":
     unittest.main()
