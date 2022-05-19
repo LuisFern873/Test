@@ -3,17 +3,17 @@ import unittest
 import json
 from app import app, db
 
-TEST_DB = 'test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:1234@localhost:5432/test_proyecto_dbp'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['TESTING'] = True
+app.config['WTF_CSRF_ENABLED'] = False
+app.config['DEBUG'] = False
+
+
+db.drop_all()
+db.create_all()
 
 class Testeo(unittest.TestCase):
-
-    # Ejecutar antes de cada test #
-    def setUp(self):
-        app.config['TESTING'] = True
-        app.config['WTF_CSRF_ENABLED'] = False
-        app.config['DEBUG'] = False
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:1234@localhost:5432/test_proyecto_dbp'
-        app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # Ejecutar despues de cada test #
     def tearDown(self):
@@ -166,6 +166,8 @@ class Testeo(unittest.TestCase):
             content_type = 'application/json',
             follow_redirects = True)
         self.assertIn(b'success', respuesta.data)
+
+    # Test de actualizacion de empleados
 
 if __name__ == "__main__":
     unittest.main()
