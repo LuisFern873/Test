@@ -167,7 +167,7 @@ class Testeo(unittest.TestCase):
             follow_redirects = True)
         self.assertIn(b'success', respuesta.data)
 
-    # Test de actualizacion de empleados
+    # Probando la actualizacion de empleados
 
     def test_4a_UpdateEmpleado_wrong_DNI(self):
         tester = app.test_client(self)
@@ -204,6 +204,17 @@ class Testeo(unittest.TestCase):
             content_type = 'application/json',
             follow_redirects = True)
         self.assertNotIn(b'Ingrese un apellido valido' , respuesta.data)
+
+    # Probando la creacion y actualizacion de tareas
+
+    def test_5a_asignarTarea_wrong_titulo(self):
+        tester = app.test_client(self)
+        respuesta = tester.post(
+            '/empleados/asignar_tarea/77777777' ,
+            data = json.dumps(dict(titulo = '', descripcion = 'Hidratarse es bueno')),
+            content_type = 'application/json',
+            follow_redirects = True)
+        self.assertIn(b'Ingrese un titulo valido' , respuesta.data)
 
 if __name__ == "__main__":
     unittest.main()
