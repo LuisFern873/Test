@@ -221,16 +221,23 @@ def update_empleado(dni):
         
         if edit_dni_empleado != "":
             empleado.update({'dni_empleado': edit_dni_empleado})
+        else:
+            response['mensaje_error'] = 'Ingrese un dni valido'
+        
         if edit_nombres != "":
             empleado.update({'nombres': edit_nombres})
+        else:
+            response['mensaje_error'] = 'Ingrese un nombre valido'            
+        
         if edit_apellidos != "":
             empleado.update({'apellidos': edit_apellidos})
+        else:
+            response['mensaje_error'] = 'Ingrese un apellido valido'            
         
         empleado.update({'fecha_modificado': datetime.now()})
         
         db.session.commit()
 
-        response['mensaje'] = 'success'
         response['dni_empleado'] = dni
 
     except Exception as exp:
