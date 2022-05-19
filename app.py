@@ -149,6 +149,7 @@ def delete_empleado(dni):
         Empleado.query.filter_by(dni_empleado = dni).delete()
 
         db.session.commit()
+        response['mensaje'] = 'success'
         response['dni_empleado'] = dni
 
     except Exception as exp:
@@ -179,10 +180,18 @@ def update_empleado(dni):
         
         if edit_dni_empleado != "":
             empleado.update({'dni_empleado': edit_dni_empleado})
+        else:
+            response['mensaje_error'] = 'Ingrese un dni valido'
+        
         if edit_nombres != "":
             empleado.update({'nombres': edit_nombres})
+        else:
+            response['mensaje_error'] = 'Ingrese un nombre valido'            
+        
         if edit_apellidos != "":
             empleado.update({'apellidos': edit_apellidos})
+        else:
+            response['mensaje_error'] = 'Ingrese un apellido valido'            
         
         empleado.update({'fecha_modificado': datetime.now()})
         
@@ -213,25 +222,34 @@ def tareas():
 @app.route('/empleados/asignar_tarea/<dni>', methods = ['POST','GET'])
 def asignar_tarea(dni):
 
+    response = {}
+
     # Recuperar datos de la tarea
     titulo = request.get_json()["titulo"]
     descripcion = request.get_json()["descripcion"]
 
-    # Empleado al que le vamos a asignar la tarea
-    empleado = Empleado.query.filter_by(dni_empleado = dni).first()
+    if titulo == "":
+        response['mensaje_error'] = 'Ingrese un titulo valido'
+        return response
+    elif descripcion == "":
+        response['mensaje_error'] = 'Ingrese una descripcion valida'
+        return response
+    else:
+        # Empleado al que le vamos a asignar la tarea
+        empleado = Empleado.query.filter_by(dni_empleado = dni).first()
 
-    # Creamos la tarea
-    tarea = Tarea(
-        titulo = titulo,
-        descripcion = descripcion,
-        completo = False,
-        empleado = empleado
-    )
-    # Añadimos la tarea
-    db.session.add(tarea)
-    db.session.commit()
+        # Creamos la tarea
+        tarea = Tarea(
+            titulo = titulo,
+            descripcion = descripcion,
+            completo = False,
+            empleado = empleado
+        )
+        # Añadimos la tarea
+        db.session.add(tarea)
+        db.session.commit()
 
-    return jsonify({'titulo': titulo, 'descripcion': descripcion})
+        return jsonify({'titulo': titulo, 'descripcion': descripcion})
 
 @app.route('/tareas/update_tarea/<id>', methods = ['PUT'])
 def update_tarea(id):
