@@ -169,5 +169,16 @@ class Testeo(unittest.TestCase):
 
     # Test de actualizacion de empleados
 
+    def test_4a_UpdateEmpleado_wrong_DNI(self):
+        tester = app.test_client(self)
+        respuesta = tester.put(
+            '/empleados/update_empleado/85790502',
+            data = json.dumps(dict(edit_dni_empleado = "", edit_nombres='Alonso', edit_apellidos='Grau')),
+            content_type = 'application/json',
+            follow_redirects = True)
+        self.assertIn(b'Ingrese un dni valido', respuesta.data)
+
+
+
 if __name__ == "__main__":
     unittest.main()
